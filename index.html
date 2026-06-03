@@ -652,27 +652,30 @@ if('serviceWorker' in navigator) {
 
   <div class="plan-content active" id="plan1">
     <div class="quote"><p>⚖️ "The Foxtrot — smooth, forward, controlled. The warrior who trains at a sustainable pace arrives at the destination stronger than the one who sprinted and burned out." — Sensei 🎋</p></div>
+    <div style="font-size:0.72rem;color:var(--text3);margin-bottom:0.75rem;padding:0.4rem 0.75rem;background:var(--bg3);border-radius:4px;border:1px solid var(--border)">
+      🔴 <span style="color:#e05555;font-weight:bold">Red = On Campus</span> &nbsp;·&nbsp; ⬜ White = Online &nbsp;·&nbsp; * = On Campus marker from VUIM Course Map &nbsp;·&nbsp; All CI/CO/CS courses are always on campus
+    </div>
     <table class="plan-table">
-      <tr><th>Quarter</th><th>Key Courses</th><th>Credits</th><th>Load</th></tr>
-      <tr><td>Winter 2026</td><td>WM301, WM300, EAM302 ✅</td><td>~9</td><td class="load-light">🟢 Light ✅ Done</td></tr>
-      <tr><td>Spring 2026</td><td>ME410, <strong>EAM303 🔑</strong>, WM340, WM350</td><td>~13</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Summer 2026</td><td>EAM301, WM360, EAM310* (Daniel), AC300, TB300</td><td>~14</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Fall 2026</td><td>WM410, AC310, EAM312, HB310</td><td>~13</td><td class="load-heavy">🔴 Heavy</td></tr>
-      <tr><td>Winter 2027</td><td>WM420 🔑, AC320, ME420, WM400, TB301 · Int: Phase Exam 2</td><td>~14</td><td class="load-heavy">🔴 Heavy</td></tr>
-      <tr><td>Spring 2027</td><td>WM450, AC410, AC330, HB410 · Int: CO450* + Phase Exam 1</td><td>~13</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Summer 2027</td><td>CO510*(1 shift), WM480, AC340, EAM320, EL of choice</td><td>~14</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Fall 2027</td><td>CO510*(1 shift), WM530, AC420, ME520</td><td>~12</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Winter 2028</td><td>CO520*(1 shift), WM550, AC390, HB420, TB301 · Int: Phase Exam 2</td><td>~13</td><td class="load-heavy">🔴 Heavy</td></tr>
-      <tr><td>Spring 2028</td><td>CI510*(2 shifts), AC510, WM510, HB430</td><td>~14</td><td class="load-heavy">🔴 Heavy</td></tr>
-      <tr><td>Summer 2028</td><td>CI510*(3 shifts), CS000, CS510, EAM430, WM520, EAM440 · Int: Phase Exam 3</td><td>~18</td><td class="load-heavy">🔴 VERY Heavy</td></tr>
-      <tr><td>Fall 2028</td><td>CI520*(3 shifts), CS520, AC430, EAM460, WM610 · Int: Phase Exam 4</td><td>~16</td><td class="load-heavy">🔴 Very Heavy</td></tr>
-      <tr><td>Winter 2029</td><td>CI530*(3 shifts), CS530, HB440, WM500, HB510</td><td>~17</td><td class="load-heavy">🔴 Very Heavy</td></tr>
-      <tr><td>Spring 2029</td><td>HB520, HB530, WM400 (or EL), EL of choice · Int: MAcHM Grad Exam</td><td>~12</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Summer 2029</td><td>HB540, EL of choice, AC460, HB400 · Int: Herbal Workshop 🌏</td><td>~13</td><td class="load-mod">🟡 Mod</td></tr>
-      <tr><td>Fall 2029</td><td>EAM450, CM770, HB550, ME311</td><td>~14</td><td class="load-heavy">🔴 Heavy</td></tr>
-      <tr><td>Winter 2030</td><td>CM700, IM610, CI540*(3 shifts), CS540, WM620 · Int: Phase Exam 5</td><td>~16</td><td class="load-heavy">🔴 Very Heavy</td></tr>
-      <tr><td>Spring 2030</td><td>CI550*(3 shifts), CS550, ME311, CM750, IM600 · Int: Grad Exam 🎓</td><td>~16</td><td class="load-heavy">🔴 Heavy</td></tr>
-      <tr><td>Summer 2030</td><td>ME600, CM740, EL of choice — THE FINAL BOW 🎉</td><td>~8</td><td class="load-light">🟢 Light</td></tr>
+      <tr><th>Quarter</th><th>On Campus 🔴</th><th>Online ⬜</th><th>Intensives</th><th>Load</th></tr>
+      <tr><td>Winter 2026 ✅</td><td style="color:#e05555">—</td><td>WM301, WM300, EAM302 ✅</td><td>—</td><td class="load-light">🟢 Done</td></tr>
+      <tr><td>Spring 2026</td><td style="color:#e05555">—</td><td>ME410, EAM303 🔑, WM340, WM350</td><td>—</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Summer 2026</td><td style="color:#e05555">EAM310* (Daniel), AC300*</td><td>EAM301, WM360, TB300</td><td>—</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Fall 2026</td><td style="color:#e05555">AC310*</td><td>WM410, EAM312, HB310</td><td>—</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Winter 2027</td><td style="color:#e05555">AC320*, ME420*, AC410*</td><td>WM420 🔑, WM400, TB301</td><td>Phase Exam 2</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Spring 2027</td><td style="color:#e05555">AC330*, AC410*</td><td>WM450, HB410</td><td>CO450* + Phase Exam 1</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Summer 2027</td><td style="color:#e05555">CO510* (1 shift), WM480*, AC340*</td><td>EAM320, EL of choice</td><td>—</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Fall 2027</td><td style="color:#e05555">CO510* (1 shift), AC420*, ME520*</td><td>WM530</td><td>—</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Winter 2028</td><td style="color:#e05555">CO520* (1 shift), AC390*</td><td>WM550, HB420, TB301</td><td>Phase Exam 2</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Spring 2028</td><td style="color:#e05555">CI510* (2 shifts), AC510*</td><td>WM510, HB430</td><td>—</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Summer 2028</td><td style="color:#e05555">CI510* (3 shifts), CS000*, CS510*</td><td>EAM430, WM520, EAM440</td><td>Phase Exam 3</td><td class="load-heavy">🔴 VERY Heavy</td></tr>
+      <tr><td>Fall 2028</td><td style="color:#e05555">CI520* (3 shifts), CS520*, AC430*</td><td>EAM460, WM610</td><td>Phase Exam 4</td><td class="load-heavy">🔴 Very Heavy</td></tr>
+      <tr><td>Winter 2029</td><td style="color:#e05555">CI530* (3 shifts), CS530*</td><td>HB440, WM500, HB510</td><td>—</td><td class="load-heavy">🔴 Very Heavy</td></tr>
+      <tr><td>Spring 2029</td><td style="color:#e05555">AC460*</td><td>HB520, HB530, EL of choice</td><td>MAcHM Grad Exam</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Summer 2029 🌏</td><td style="color:#e05555">—</td><td>HB540, EL×2, HB400</td><td>Herbal Workshop</td><td class="load-mod">🟡 Mod — Study Abroad Window</td></tr>
+      <tr><td>Fall 2029</td><td style="color:#e05555">—</td><td>EAM450, CM770, HB550, ME311</td><td>—</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Winter 2030</td><td style="color:#e05555">CI540* (3 shifts), CS540*</td><td>CM700, IM610, WM620</td><td>Phase Exam 5</td><td class="load-heavy">🔴 Very Heavy</td></tr>
+      <tr><td>Spring 2030</td><td style="color:#e05555">CI550* (3 shifts), CS550*</td><td>ME311, CM750, IM600</td><td>Grad Exam 🎓</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Summer 2030 🎉</td><td style="color:#e05555">—</td><td>ME600, CM740, EL of choice</td><td>—</td><td class="load-light">🟢 Light — DONE</td></tr>
     </table>
   </div>
 
@@ -903,51 +906,206 @@ if('serviceWorker' in navigator) {
 
 <!-- SECTION 7: STUDY ABROAD -->
 <div class="section" id="abroad">
-  <h2 class="section-title">🌏 Study Abroad</h2>
-  <p class="section-desc">"To understand the medicine, one must walk the land from which it came. The channels become real when you walk the streets of Seoul or Beijing." — Sensei 🎋</p>
+  <h2 class="section-title">🌏 Study Abroad — Real Programs, Real Deadlines</h2>
+  <p class="section-desc">Researched programs at the top Korean and Chinese medicine universities. Everything you need to apply — target window: Summer 2029.</p>
 
-  <div class="abroad-grid">
-    <div class="abroad-card">
-      <div class="abroad-flag">🇰🇷</div>
-      <div class="abroad-title">South Korea — Korean Medicine</div>
-      <div class="abroad-item"><span>Primary Specialty</span><span>Sa-Am, Sa-sang, Dong Ui Bo Gam</span></div>
-      <div class="abroad-item"><span>Prep Electives</span><span>EL400, EL410, EL420</span></div>
-      <div class="abroad-item"><span>Language</span><span>Korean (Soohyeon + Suzie, 2x/wk)</span></div>
-      <div class="abroad-item"><span>Institutions</span><span>Kyung Hee University area programs</span></div>
-      <div class="abroad-item"><span>Dance Connection</span><span>Rhythm channels (Kidney, Bladder, GB)</span></div>
+  <!-- TOP PROGRAMS GRID -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin-bottom:1.5rem">
+
+    <!-- KYUNG HEE KOREA -->
+    <div class="abroad-card" style="border-color:rgba(201,168,76,0.5)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
+        <div style="font-size:2rem">🇰🇷</div>
+        <div>
+          <div class="abroad-title" style="margin-bottom:0">Kyung Hee University</div>
+          <div style="font-size:0.72rem;color:var(--gold3)">🏆 #1 Recommendation · Seoul, South Korea</div>
+        </div>
+      </div>
+      <div class="abroad-item"><span>Program</span><span>College of Korean Medicine — Exchange</span></div>
+      <div class="abroad-item"><span>Campus</span><span>Seoul Campus (26 Kyungheedae-ro)</span></div>
+      <div class="abroad-item"><span>Duration</span><span>1 semester (Sep–Dec) or full year</span></div>
+      <div class="abroad-item"><span>Term Dates</span><span>Fall: Sep–Dec · Spring: Mar–Jun</span></div>
+      <div class="abroad-item" style="color:var(--red)"><span>🔴 Nomination Deadline</span><span>Fall: April 30 · Spring: Oct 30</span></div>
+      <div class="abroad-item" style="color:var(--red)"><span>🔴 Application Deadline</span><span>Fall: May 30 · Spring: Nov 30</span></div>
+      <div class="abroad-item"><span>Language (Korean track)</span><span>TOPIK Level 5+ (from Fall 2025)</span></div>
+      <div class="abroad-item"><span>Language (English track)</span><span>TOEFL iBT 82 / IELTS 6.5 recommended</span></div>
+      <div class="abroad-item"><span>GPA Minimum</span><span>2.5 (you target 3.5+) ✅</span></div>
+      <div class="abroad-item"><span>Funds Required</span><span>$5,000/semester · $9,000/year</span></div>
+      <div class="abroad-item"><span>Housing</span><span>On-campus dorm — highly recommended</span></div>
+      <div class="abroad-item"><span>Visa</span><span>D-2 Student Visa via Korean embassy</span></div>
+      <div class="abroad-item"><span>Contact</span><span>inbound.mobility@khu.ac.kr</span></div>
+      <div class="abroad-item"><span>Website</span><span>oia.khu.ac.kr</span></div>
+      <div class="abroad-item"><span>Buddy Program</span><span>✅ Korean student paired with you</span></div>
+      <div class="abroad-item"><span>Process</span><span>VUIM nominates → Online application → Acceptance notice</span></div>
+      <div style="margin-top:0.6rem;background:rgba(201,168,76,0.07);border-left:3px solid var(--gold3);padding:0.5rem 0.6rem;border-radius:0 4px 4px 0;font-size:0.75rem;color:var(--text2)">
+        💡 Also home to IEIKM (Institute of East-West Integrative Korean Medicine) — clinical observation program specifically for acupuncturists. Korean Medicine hospital on campus. Strongest for Sa-Am, Sa-sang, and classical Korean medicine.
+      </div>
     </div>
-    <div class="abroad-card">
-      <div class="abroad-flag">🇨🇳</div>
-      <div class="abroad-title">China — Classical TCM</div>
-      <div class="abroad-item"><span>Primary Specialty</span><span>Classical TCM, Jin Gui, Wen Bing</span></div>
-      <div class="abroad-item"><span>Prep Electives</span><span>EL430, EL440, EL510</span></div>
-      <div class="abroad-item"><span>Language</span><span>Mandarin (HelloChinese, 10min/day)</span></div>
-      <div class="abroad-item"><span>Institutions</span><span>Beijing/Shanghai TCM University area</span></div>
-      <div class="abroad-item"><span>Dance Connection</span><span>Smooth channels (Lung, Liver, Heart, Stomach)</span></div>
+
+    <!-- WON INSTITUTE / WONKWANG SHORT-TERM -->
+    <div class="abroad-card" style="border-color:rgba(90,154,224,0.4)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
+        <div style="font-size:2rem">🇰🇷</div>
+        <div>
+          <div class="abroad-title" style="margin-bottom:0">Wonkwang University (via Won Institute)</div>
+          <div style="font-size:0.72rem;color:var(--blue)">🥈 Best Short-Term · Iksan, South Korea</div>
+        </div>
+      </div>
+      <div class="abroad-item"><span>Program</span><span>TKM Study Abroad — 11 Days</span></div>
+      <div class="abroad-item"><span>Location</span><span>Wonkwang University + Seoul finale</span></div>
+      <div class="abroad-item"><span>Duration</span><span>11 days — perfect for 3-week break!</span></div>
+      <div class="abroad-item"><span>Eligibility</span><span>2nd/3rd year acupuncture student, good standing</span></div>
+      <div class="abroad-item"><span>Spots</span><span>Up to 15 — first come, first served</span></div>
+      <div class="abroad-item" style="color:var(--gold)"><span>💰 Deposit</span><span>$100 to reserve your spot</span></div>
+      <div class="abroad-item"><span>Covers</span><span>Room, board, meals, tuition</span></div>
+      <div class="abroad-item"><span>Not covered</span><span>Airfare (your responsibility)</span></div>
+      <div class="abroad-item"><span>NCCAOM PDAs</span><span>25–30 credits (pending)</span></div>
+      <div class="abroad-item"><span>Content</span><span>Classroom lectures + hospital observation + Seoul cultural</span></div>
+      <div class="abroad-item"><span>Open to</span><span>Students from other accredited schools ✅</span></div>
+      <div class="abroad-item"><span>Contact</span><span>Won Institute · Glenside, PA</span></div>
+      <div class="abroad-item"><span>Website</span><span>woninstitute.edu/life-at-won/tkm-south-korea-trip</span></div>
+      <div style="margin-top:0.6rem;background:rgba(90,154,224,0.07);border-left:3px solid rgba(90,154,224,0.5);padding:0.5rem 0.6rem;border-radius:0 4px 4px 0;font-size:0.75rem;color:var(--text2)">
+        💡 This is the BEST option for a 3-week break trip. 11 days, all-inclusive except airfare, and you earn NCCAOM PDAs. Can be done during any break — plan for Summer 2027 break or Winter 2028 break as a preview trip before Summer 2029 full semester.
+      </div>
     </div>
-    <div class="abroad-card">
-      <div class="abroad-flag">💃</div>
-      <div class="abroad-title">Study Abroad Goals</div>
-      <div class="abroad-item"><span>Primary</span><span>Clinical immersion in source tradition</span></div>
-      <div class="abroad-item"><span>Secondary</span><span>Language fluency for specialist texts</span></div>
-      <div class="abroad-item"><span>Tertiary</span><span>Professional network — international colleagues</span></div>
-      <div class="abroad-item"><span>Dance Medicine</span><span>Learn how Korean/Chinese healers treat performers</span></div>
-      <div class="abroad-item"><span>Credit Transfer</span><span>Confirm policy with advisor by Fall 2027</span></div>
+
+    <!-- JASENG HOSPITAL SHORT-TERM -->
+    <div class="abroad-card" style="border-color:rgba(90,184,122,0.4)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
+        <div style="font-size:2rem">🇰🇷</div>
+        <div>
+          <div class="abroad-title" style="margin-bottom:0">Jaseng Hospital of Korean Medicine</div>
+          <div style="font-size:0.72rem;color:var(--green)">🏥 Best Clinical Hospital Program · Seoul</div>
+        </div>
+      </div>
+      <div class="abroad-item"><span>Program</span><span>Integrative & Korean Medicine Training</span></div>
+      <div class="abroad-item"><span>Format</span><span>Online course + optional 5-day in-person Seoul</span></div>
+      <div class="abroad-item"><span>Focus</span><span>Musculoskeletal · Ultrasound-guided acupuncture · Sports</span></div>
+      <div class="abroad-item"><span>Techniques</span><span>Acupuncture, cupping, pharmacopuncture, Chuna manual therapy</span></div>
+      <div class="abroad-item"><span>CE Credits</span><span>20 NCCAOM CEU/PDA + up to 23 AMA CME credits</span></div>
+      <div class="abroad-item"><span>Eligibility</span><span>Licensed acupuncturists / students with clinical exp.</span></div>
+      <div class="abroad-item"><span>Dance Medicine Relevance</span><span>⭐⭐⭐⭐⭐ MSK + sports = perfect for dancers</span></div>
+      <div class="abroad-item"><span>Website</span><span>jaseng.education</span></div>
+      <div style="margin-top:0.6rem;background:rgba(90,184,122,0.07);border-left:3px solid rgba(90,184,122,0.5);padding:0.5rem 0.6rem;border-radius:0 4px 4px 0;font-size:0.75rem;color:var(--text2)">
+        💡 Jaseng specializes in musculoskeletal and sports-injury Korean medicine — directly relevant to dance medicine. Best taken after CI510 begins (Fall 2028+) when you have clinical experience to apply. Can earn NCCAOM PDAs for license renewal.
+      </div>
+    </div>
+
+    <!-- BUCM CHINA -->
+    <div class="abroad-card" style="border-color:rgba(224,120,64,0.4)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
+        <div style="font-size:2rem">🇨🇳</div>
+        <div>
+          <div class="abroad-title" style="margin-bottom:0">Beijing University of Chinese Medicine</div>
+          <div style="font-size:0.72rem;color:var(--orange)">🏆 #1 TCM University in China · Beijing</div>
+        </div>
+      </div>
+      <div class="abroad-item"><span>Rank</span><span>#1 TCM institution · 211 Project national key university</span></div>
+      <div class="abroad-item"><span>Founded</span><span>1956 — oldest & most prestigious TCM university</span></div>
+      <div class="abroad-item"><span>Short-Term Program</span><span>TCM Exploration Journey — 11 or 14 days</span></div>
+      <div class="abroad-item"><span>Content</span><span>TCM theory, diagnosis, meridians, herbs, acupuncture, Tuina, field trips</span></div>
+      <div class="abroad-item"><span>Language</span><span>English or Chinese (your choice)</span></div>
+      <div class="abroad-item" style="color:var(--red)"><span>🔴 Apply by</span><span>3 months before start (Plan 1) or 6 months (Plan 2)</span></div>
+      <div class="abroad-item"><span>Schedule</span><span>Available year-round — flexible start dates</span></div>
+      <div class="abroad-item"><span>Housing</span><span>On-campus dorm: ~70–160 RMB/day (~$10–22/day)</span></div>
+      <div class="abroad-item"><span>Tuition est.</span><span>~20,000–30,000 RMB/semester (~$2,800–4,200)</span></div>
+      <div class="abroad-item"><span>Bonus</span><span>BUCM offers CNT exam — you can sit it here! ✅</span></div>
+      <div class="abroad-item"><span>Contact</span><span>iec.bucm.edu.cn · International Education Center</span></div>
+      <div class="abroad-item"><span>Visa</span><span>X2 (short-term) or X1 (full semester)</span></div>
+      <div style="margin-top:0.6rem;background:rgba(224,120,64,0.07);border-left:3px solid rgba(224,120,64,0.5);padding:0.5rem 0.6rem;border-radius:0 4px 4px 0;font-size:0.75rem;color:var(--text2)">
+        💡 BUCM is where your textbook knowledge was born. 3 affiliated hospitals, School of Acupuncture-Moxibustion & Tuina, School of Chinese Materia Medica. Year-round flexible short programs mean you can go during any 3-week intensive break. Also — BUCM recognizes NCCAOM credentials.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TIMING COMPARISON TABLE -->
+  <div style="margin-bottom:1.5rem">
+    <div class="card-title" style="color:var(--gold);margin-bottom:0.75rem">🏆 Best Windows — Ranked for Your Schedule</div>
+    <table class="window-table">
+      <tr><th>Rank</th><th>Window</th><th>Program Match</th><th>On-Campus Conflicts</th><th>Risk</th></tr>
+      <tr><td>🥇 BEST</td><td><strong style="color:var(--gold)">Summer 2029</strong></td><td>Kyung Hee Fall term (Sep–Dec) · Apply by May 30, 2029</td><td class="load-light">None — HB540, electives, HB400 all online</td><td class="load-light">🟢 Low</td></tr>
+      <tr><td>🥈 GREAT</td><td>Spring 2029</td><td>Kyung Hee Spring term (Mar–Jun) · Apply by Nov 30, 2028</td><td class="load-light">AC460 only on-campus — could defer</td><td class="load-light">🟢 Low</td></tr>
+      <tr><td>🥉 SHORT TRIP</td><td>Any 3-week break</td><td>Won Institute / Wonkwang 11-day trip · BUCM 11–14-day</td><td class="load-light">No conflicts — break period</td><td class="load-light">🟢 Zero</td></tr>
+      <tr><td>⚠️ POSSIBLE</td><td>Summer 2027</td><td>BUCM short-term · Jaseng online</td><td class="load-mod">CO510 is 1 shift/wk — discuss with advisor</td><td class="load-mod">🟡 Low-Med</td></tr>
+      <tr><td>❌ AVOID</td><td>Summer 2028</td><td>—</td><td class="load-heavy">CI510 (3 shifts) + EAM430 + EAM440</td><td class="load-heavy">🔴 High</td></tr>
+      <tr><td>❌ AVOID</td><td>Winter 2029</td><td>—</td><td class="load-heavy">CI530 (3 shifts) + HB440 + HB510</td><td class="load-heavy">🔴 High</td></tr>
+      <tr><td>❌ AVOID</td><td>Winter 2030</td><td>—</td><td class="load-heavy">CI540 (3 shifts) + Phase Exam 5</td><td class="load-heavy">🔴 High</td></tr>
+    </table>
+  </div>
+
+  <!-- APPLICATION TIMELINE -->
+  <div style="margin-bottom:1.5rem">
+    <div class="card-title" style="color:var(--gold);margin-bottom:0.75rem">📅 Your Study Abroad Action Timeline</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.5rem;font-size:0.78rem">
+      <div class="card" style="padding:0.6rem;border-color:rgba(224,85,85,0.3)">
+        <div style="color:var(--red);font-size:0.7rem;margin-bottom:0.2rem">NOW — Fall 2026 🔴</div>
+        <div style="color:var(--text2)">Begin Korean lessons daily. Start Mandarin (HelloChinese). Research both programs online. Talk to VUIM advisor about credit transfer policy.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Winter 2027 Break</div>
+        <div style="color:var(--text2)">Consider the Won Institute/Wonkwang 11-day trip to Korea as a preview. $100 deposit. Earn 25–30 NCCAOM PDAs. First contact with Korean medicine in person.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Summer 2027</div>
+        <div style="color:var(--text2)">Contact Kyung Hee OIA: inbound.mobility@khu.ac.kr. Ask about VUIM partnership. Research scholarship options. Begin building TOPIK vocabulary.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Fall 2027 🔑</div>
+        <div style="color:var(--text2)">Confirm credit transfer policy with VUIM advisor. Confirm VUIM will nominate you to Kyung Hee. Apply for study abroad scholarships (Korean Government Scholarship).</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Winter 2028</div>
+        <div style="color:var(--text2)">Apply for Korean Government Scholarship (GKS). VUIM nominates you via email to Kyung Hee OIA. Begin passport/visa research. Apply for study abroad financial aid.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Spring 2028 🔑</div>
+        <div style="color:var(--text2)">Submit Kyung Hee application (for Fall 2028 if going then, or prepare for Spring 2029). Confirm housing (on-campus dorm). Bank statement showing $5,000+.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Fall 2028</div>
+        <div style="color:var(--text2)">Confirm placement confirmed. Arrange housing. Apply for D-2 student visa at Korean embassy (apply 2+ months before departure).</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">By Nov 30, 2028 🔴</div>
+        <div style="color:var(--text2)">HARD DEADLINE: Submit Kyung Hee application for Spring 2029. Nomination must happen by Oct 30, 2028 (VUIM emails KHU). All docs in English.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--gold);font-size:0.7rem;margin-bottom:0.2rem">Winter 2029</div>
+        <div style="color:var(--text2)">Book flights. Finalize housing. Final Korean language sprint. Pack. Notify VUIM clinic of absence. Confirm all VUIM courses for that quarter are online.</div>
+      </div>
+      <div class="card" style="padding:0.6rem;border-color:var(--border2)">
+        <div style="color:var(--gold2);font-size:0.7rem;margin-bottom:0.2rem">🌏 Summer 2029 — GO!</div>
+        <div style="color:var(--text2)">Seoul campus. Korean Medicine hospital. Sa-Am acupuncture. Clinical observation. Buddy program. Cultural immersion. Document everything for your capstone.</div>
+      </div>
+      <div class="card" style="padding:0.6rem">
+        <div style="color:var(--green);font-size:0.7rem;margin-bottom:0.2rem">Fall 2029 — Return</div>
+        <div style="color:var(--text2)">Apply abroad learning to EAM450 Internal Medicine III and CM770 Reproductive Health. Korean medicine perspective enriches your capstone research.</div>
+      </div>
     </div>
   </div>
 
-  <div style="margin-top:1.5rem">
-    <div class="card-title" style="color:var(--gold);margin-bottom:0.5rem">🏆 Study Abroad Windows — Ranked</div>
-    <table class="window-table">
-      <tr><th>Rank</th><th>Window</th><th>Why Ideal</th><th>Risk</th></tr>
-      <tr><td>🥇 BEST</td><td><strong style="color:var(--gold)">Summer 2029</strong></td><td>No clinical shifts · HB540 aligns with herbal immersion · TB300 flexible slot</td><td class="load-light">🟢 Low</td></tr>
-      <tr><td>🥈 GREAT</td><td>Spring 2029</td><td>No clinical shifts · formula courses align with herbal immersion</td><td class="load-light">🟢 Low</td></tr>
-      <tr><td>🥉 GOOD</td><td>Summer 2027</td><td>Moderate load · CO510 is only 1 shift/week · with advisor approval</td><td class="load-mod">🟡 Medium</td></tr>
-      <tr><td>🎯 POSSIBLE</td><td>Any 3-week break</td><td>Short but impactful cultural immersion trips</td><td class="load-light">🟢 Low</td></tr>
-      <tr><td>❌ AVOID</td><td>Summer 2028</td><td>CI510 (3 shifts) + EAM430 + EAM440 = overwhelming</td><td class="load-heavy">🔴 High</td></tr>
-      <tr><td>❌ AVOID</td><td>Winter 2029</td><td>CI530 (3 shifts) + HB440 + HB510 = too heavy</td><td class="load-heavy">🔴 High</td></tr>
-      <tr><td>❌ AVOID</td><td>Winter 2030</td><td>CI540 + Phase Exam 5 = never leave before championship</td><td class="load-heavy">🔴 High</td></tr>
-    </table>
+  <!-- DOCUMENTS REQUIRED -->
+  <div>
+    <div class="card-title" style="color:var(--gold);margin-bottom:0.75rem">📋 Kyung Hee Application Documents Checklist</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0.4rem;font-size:0.78rem">
+      <div class="tracker-item" id="sa-1"><input type="checkbox" id="cb-sa-1" onchange="saveCheck('sa-1')"><label for="cb-sa-1">Passport copy (color, full size including signature page)</label></div>
+      <div class="tracker-item" id="sa-2"><input type="checkbox" id="cb-sa-2" onchange="saveCheck('sa-2')"><label for="cb-sa-2">Passport photo (3.5×4.5cm, color, white background)</label></div>
+      <div class="tracker-item" id="sa-3"><input type="checkbox" id="cb-sa-3" onchange="saveCheck('sa-3')"><label for="cb-sa-3">Official bank statement ($5,000+ per semester)</label></div>
+      <div class="tracker-item" id="sa-4"><input type="checkbox" id="cb-sa-4" onchange="saveCheck('sa-4')"><label for="cb-sa-4">Health/travel insurance certification</label></div>
+      <div class="tracker-item" id="sa-5"><input type="checkbox" id="cb-sa-5" onchange="saveCheck('sa-5')"><label for="cb-sa-5">Official VUIM nomination email sent to KHU OIA</label></div>
+      <div class="tracker-item" id="sa-6"><input type="checkbox" id="cb-sa-6" onchange="saveCheck('sa-6')"><label for="cb-sa-6">Online application completed at oia.khu.ac.kr</label></div>
+      <div class="tracker-item" id="sa-7"><input type="checkbox" id="cb-sa-7" onchange="saveCheck('sa-7')"><label for="cb-sa-7">TOEFL iBT 82+ or IELTS 6.5+ score (English track)</label></div>
+      <div class="tracker-item" id="sa-8"><input type="checkbox" id="cb-sa-8" onchange="saveCheck('sa-8')"><label for="cb-sa-8">TOPIK Level 5+ (if Korean track — start now!)</label></div>
+      <div class="tracker-item" id="sa-9"><input type="checkbox" id="cb-sa-9" onchange="saveCheck('sa-9')"><label for="cb-sa-9">Official transcript showing 3.0+ GPA</label></div>
+      <div class="tracker-item" id="sa-10"><input type="checkbox" id="cb-sa-10" onchange="saveCheck('sa-10')"><label for="cb-sa-10">Proposed course of study (signed acknowledgment)</label></div>
+      <div class="tracker-item" id="sa-11"><input type="checkbox" id="cb-sa-11" onchange="saveCheck('sa-11')"><label for="cb-sa-11">D-2 student visa application submitted</label></div>
+      <div class="tracker-item" id="sa-12"><input type="checkbox" id="cb-sa-12" onchange="saveCheck('sa-12')"><label for="cb-sa-12">On-campus housing booked (KHU dorm — highly recommended)</label></div>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:1.25rem">
+    <p>🌏 "The channels you have studied in textbooks become real when you walk the streets of Seoul. The herbs you have memorized come alive when you smell them in Dongdaemun market. This is the Journey Path — and it changes everything." — Sensei 🎋</p>
   </div>
 </div>
 
@@ -1420,6 +1578,25 @@ function showPlan(planId) {
   event.target.classList.add('active');
 }
 
+// ===== STUDY ABROAD CHECKBOX PERSISTENCE =====
+function saveCheck(id) {
+  const cb = document.getElementById('cb-' + id);
+  const ti = document.getElementById(id);
+  if (!cb) return;
+  localStorage.setItem('vuim-' + id, cb.checked);
+  if (ti) ti.classList.toggle('checked', cb.checked);
+}
+function loadAbroadChecks() {
+  ['sa-1','sa-2','sa-3','sa-4','sa-5','sa-6','sa-7','sa-8','sa-9','sa-10','sa-11','sa-12'].forEach(id => {
+    const cb = document.getElementById('cb-' + id);
+    const ti = document.getElementById(id);
+    if (!cb) return;
+    const saved = localStorage.getItem('vuim-' + id) === 'true';
+    cb.checked = saved;
+    if (ti) ti.classList.toggle('checked', saved);
+  });
+}
+
 // ===== EXPORT / IMPORT PROGRESS =====
 function exportProgress() {
   const state = {};
@@ -1477,6 +1654,7 @@ function importProgress() {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   buildTracker();
+  loadAbroadChecks();
   // Auto-check EAM302 as completed
   const eam302cb = document.getElementById('cb-eam302');
   if (eam302cb && !localStorage.getItem('vuim-eam302')) {

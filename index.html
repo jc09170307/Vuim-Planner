@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan Centeno — VUIM D.AcOM Academic Planner 2026–2030</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
+  :root {
+    --bg: #1a1a1a;
+    --bg2: #222222;
+    --bg3: #2a2a2a;
+    --bg4: #333333;
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --gold3: #a07830;
+    --text: #ffffff;
+    --text2: #cccccc;
+    --text3: #999999;
+    --red: #e05555;
+    --orange: #e07840;
+    --green: #5ab87a;
+    --blue: #5a9ae0;
+    --border: rgba(201,168,76,0.25);
+    --border2: rgba(201,168,76,0.5);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(20,20,20,0.97);
+    border-bottom: 1px solid var(--border2);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+    backdrop-filter: blur(8px);
+  }
+  .nav-brand { 
+    font-size: 0.8rem; color: var(--gold); letter-spacing: 0.1em; 
+    padding: 1rem 1.5rem 1rem 0; border-right: 1px solid var(--border); 
+    margin-right: 0.5rem; white-space: nowrap; font-weight: bold;
+  }
+  .nav a {
+    color: var(--text3); text-decoration: none; font-size: 0.72rem;
+    padding: 1rem 0.7rem; letter-spacing: 0.05em; transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .nav a:hover { color: var(--gold); }
+  /* PRINT BTN */
+  .print-btn {
+    margin-left: auto; background: var(--gold3); color: #fff; 
+    border: none; padding: 0.4rem 1rem; border-radius: 4px; 
+    cursor: pointer; font-size: 0.75rem; font-family: Georgia, serif;
+    letter-spacing: 0.05em;
+  }
+  .print-btn:hover { background: var(--gold); }
+  /* HERO */
+  .hero {
+    margin-top: 56px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #242218 50%, #1a1a1a 100%);
+    border-bottom: 1px solid var(--border2);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '🏯';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 18rem; opacity: 0.03; pointer-events: none;
+  }
+  .hero-title { font-size: 2.2rem; color: var(--gold2); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .hero-sub { font-size: 1rem; color: var(--text2); letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+  .hero-detail { font-size: 0.85rem; color: var(--text3); }
+  /* PROGRESS BAR */
+  .progress-section {
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 1.2rem 2rem;
+  }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text2); margin-bottom: 0.5rem; }
+  .progress-track { height: 8px; background: var(--bg4); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--gold3), var(--gold2)); transition: width 0.8s ease; }
+  .progress-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.8rem; }
+  .progress-stat { font-size: 0.78rem; color: var(--text3); }
+  .progress-stat span { color: var(--gold); font-size: 1rem; display: block; }
+  /* SECTION */
+  .section { padding: 3rem 2rem; border-bottom: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-size: 1.4rem; color: var(--gold); margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem;
+    scroll-margin-top: 70px;
+  }
+  .section-desc { font-size: 0.9rem; color: var(--text2); margin-bottom: 1.5rem; font-style: italic; }
+  /* CARDS GRID */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border2); }
+  .card-title { font-size: 0.85rem; color: var(--gold2); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+  .card-body { font-size: 0.82rem; color: var(--text2); line-height: 1.7; }
+  .card-stat { font-size: 1.6rem; color: var(--gold); font-weight: bold; }
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before { content:''; position:absolute; left:0.75rem; top:0; bottom:0; width:2px; background: var(--border2); }
+  .tl-item { position: relative; margin-bottom: 1.5rem; }
+  .tl-dot {
+    position: absolute; left: -1.85rem; top: 0.15rem;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--gold3); border: 2px solid var(--gold);
+  }
+  .tl-dot.done { background: var(--green); border-color: #80d89a; }
+  .tl-dot.current { background: var(--gold); border-color: var(--gold2); box-shadow: 0 0 8px var(--gold); }
+  .tl-year { font-size: 0.7rem; color: var(--gold3); letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+  .tl-title { font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; }
+  .tl-body { font-size: 0.8rem; color: var(--text3); }
+  .tl-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; margin-right: 0.3rem; margin-bottom: 0.3rem; }
+  .badge-green { background: rgba(90,184,122,0.15); color: var(--green); border: 1px solid rgba(90,184,122,0.3); }
+  .badge-gold { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid var(--border); }
+  .badge-red { background: rgba(224,85,85,0.15); color: var(--red); border: 1px solid rgba(224,85,85,0.3); }
+  .badge-blue { background: rgba(90,154,224,0.15); color: var(--blue); border: 1px solid rgba(90,154,224,0.3); }
+  /* PREREQ CHAINS */
+  .chain { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+  .chain-title { font-size: 0.9rem; color: var(--gold2); margin-bottom: 0.75rem; }
+  .chain-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; }
+  .chain-node {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 4px;
+    padding: 0.25rem 0.6rem; font-size: 0.75rem; color: var(--text2);
+    white-space: nowrap;
+  }
+  .chain-node.done { border-color: var(--green); color: var(--green); }
+  .chain-node.critical { border-color: var(--gold); color: var(--gold); }
+  .chain-node.blocked { border-color: rgba(224,85,85,0.5); color: var(--red); }
+  .chain-arrow { color: var(--gold3); font-size: 1rem; }
+  /* PLANS TABS */
+  .plans-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .plan-tab {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 4px;
+    padding: 0.4rem 1rem; cursor: pointer; font-size: 0.8rem; color: var(--text2);
+    transition: all 0.2s; font-family: Georgia, serif;
+  }
+  .plan-tab.active { background: var(--gold3); border-color: var(--gold); color: #fff; }
+  .plan-content { display: none; }
+  .plan-content.active { display: block; }
+  .plan-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .plan-table th { background: var(--bg3); color: var(--gold2); padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border2); }
+  .plan-table td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  .plan-table tr:hover td { background: rgba(201,168,76,0.05); }
+  .load-heavy { color: var(--red); }
+  .load-mod { color: var(--orange); }
+  .load-light { color: var(--green); }
+  /* PROGRESS TRACKER */
+  .tracker-group { margin-bottom: 1.5rem; }
+  .tracker-group-title { font-size: 0.85rem; color: var(--gold); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  .tracker-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.4rem; }
+  .tracker-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.6rem; background: var(--bg2); border-radius: 4px; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s; }
+  .tracker-item:hover { border-color: var(--border2); }
+  .tracker-item input[type="checkbox"] { accent-color: var(--gold); width: 14px; height: 14px; flex-shrink: 0; cursor: pointer; }
+  .tracker-item label { font-size: 0.78rem; color: var(--text2); cursor: pointer; line-height: 1.4; }
+  .tracker-item.checked label { text-decoration: line-through; color: var(--text3); }
+  .tracker-bar { height: 4px; background: var(--bg4); border-radius: 2px; margin-top: 0.5rem; overflow: hidden; }
+  .tracker-bar-fill { height: 100%; background: var(--gold); transition: width 0.3s; }
+  /* RISKS */
+  .risk-item { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+  .risk-level { flex-shrink: 0; width: 60px; text-align: center; }
+  .risk-dot { width: 40px; height: 40px; border-radius: 50%; margin: 0 auto 0.3rem; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .risk-dot.critical { background: rgba(224,85,85,0.2); border: 2px solid var(--red); }
+  .risk-dot.high { background: rgba(224,120,64,0.2); border: 2px solid var(--orange); }
+  .risk-dot.medium { background: rgba(201,168,76,0.2); border: 2px solid var(--gold); }
+  .risk-label { font-size: 0.6rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
+  .risk-content { flex: 1; }
+  .risk-title { font-size: 0.9rem; color: var(--text); margin-bottom: 0.25rem; }
+  .risk-desc { font-size: 0.78rem; color: var(--text3); margin-bottom: 0.3rem; }
+  .risk-action { font-size: 0.78rem; color: var(--gold2); }
+  /* STUDY ABROAD */
+  .abroad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .abroad-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+  .abroad-flag { font-size: 2rem; margin-bottom: 0.5rem; }
+  .abroad-title { font-size: 0.9rem; color: var(--gold2); margin-bottom: 0.5rem; }
+  .abroad-item { font-size: 0.8rem; color: var(--text2); padding: 0.25rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+  .window-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 1rem; }
+  .window-table th { background: var(--bg3); color: var(--gold2); padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--border2); }
+  .window-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); color: var(--text2); }
+  /* RECOMMENDATIONS */
+  .rec-list { counter-reset: rec-counter; }
+  .rec-item { display: flex; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; position: relative; }
+  .rec-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--gold3); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: bold; }
+  .rec-content { flex: 1; }
+  .rec-title { font-size: 0.9rem; color: var(--gold2); margin-bottom: 0.25rem; }
+  .rec-desc { font-size: 0.78rem; color: var(--text3); }
+  .rec-deadline { font-size: 0.72rem; color: var(--red); margin-top: 0.25rem; }
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav { padding: 0 1rem; }
+    .nav a { font-size: 0.65rem; padding: 0.8rem 0.4rem; }
+    .nav-brand { font-size: 0.7rem; padding-right: 0.75rem; }
+    .hero { padding: 2rem 1rem 1.5rem; }
+    .hero-title { font-size: 1.5rem; }
+    .section { padding: 2rem 1rem; }
+    .plan-table { font-size: 0.72rem; }
+    .progress-stats { gap: 1rem; }
+  }
+  /* PRINT */
+  @media print {
+    .nav, .print-btn { display: none !important; }
+    body { background: white; color: black; }
+    .hero { background: white; border-bottom: 2px solid #c9a84c; }
+    .hero-title { color: #8a6620; }
+    .section { border-color: #ddd; }
+    .section-title { color: #8a6620; }
+    .card, .chain, .abroad-card, .risk-item, .rec-item, .tracker-item { background: white; border-color: #ddd; }
+    .card-title, .chain-title { color: #8a6620; }
+  }
+  /* SMOOTH SCROLL */
+  html { scroll-behavior: smooth; }
+  /* QUOTE BOX */
+  .quote { background: rgba(201,168,76,0.07); border-left: 3px solid var(--gold3); padding: 0.75rem 1rem; margin-bottom: 1rem; border-radius: 0 4px 4px 0; }
+  .quote p { font-size: 0.82rem; color: var(--text2); font-style: italic; }
+  /* CERT ROW */
+  .cert-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .cert-chip { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 0.3rem 0.8rem; font-size: 0.75rem; color: var(--text2); cursor: pointer; transition: all 0.2s; }
+  .cert-chip.done { background: rgba(90,184,122,0.15); border-color: var(--green); color: var(--green); }
+  /* BELT PROGRESS */
+  .belts { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+  .belt { flex: 1; min-width: 100px; text-align: center; padding: 0.75rem 0.5rem; border-radius: 6px; background: var(--bg3); border: 1px solid var(--border); }
+  .belt-emoji { font-size: 1.5rem; display: block; margin-bottom: 0.25rem; }
+  .belt-year { font-size: 0.65rem; color: var(--gold); }
+  .belt-title { font-size: 0.7rem; color: var(--text2); margin-top: 0.2rem; }
+  /* ELECTIVE GUIDE */
+  .elective-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; font-size: 0.78rem; padding: 0.4rem 0; border-bottom: 1px solid var(--border); color: var(--text2); align-items: center; }
+  .elective-row.header { color: var(--gold2); font-size: 0.72rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">⚕ VUIM D.AcOM</div>
+  <a href="#overview">🏯 Overview</a>
+  <a href="#timeline">🗓 Timeline</a>
+  <a href="#prereqs">⛓ Prerequisites</a>
+  <a href="#plans">📘 Plans</a>
+  <a href="#tracker">📊 Tracker</a>
+  <a href="#risks">⚠️ Risks</a>
+  <a href="#abroad">🌏 Abroad</a>
+  <a href="#doctoral">🎓 Doctoral</a>
+  <a href="#recommendations">🏆 Recommendations</a>
+  <button class="print-btn" onclick="window.print()">🖨 Print</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">Jonathan Centeno, D.AcOM Candidate</div>
+  <div class="hero-sub">VIRGINIA UNIVERSITY OF INTEGRATIVE MEDICINE</div>
+  <div class="hero-detail">Dance Medicine Specialty &nbsp;·&nbsp; Winter 2026 → Summer 2030 &nbsp;·&nbsp; 247 Credits</div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-section">
+  <div class="progress-label">
+    <span>🎓 Graduation Progress — Winter 2026 Start</span>
+    <span id="prog-pct">~12% Complete</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" style="width: 12%"></div>
+  </div>
+  <div class="progress-stats">
+    <div class="progress-stat"><span>247</span>Total Credits</div>
+    <div class="progress-stat"><span>~30</span>Credits Est. Done</div>
+    <div class="progress-stat"><span>19</span>Quarters Total</div>
+    <div class="progress-stat"><span>2030</span>Graduation Year</div>
+    <div class="progress-stat"><span>5</span>Phase Exams</div>
+    <div class="progress-stat"><span>$86,450</span>Est. Total Cost</div>
+  </div>
+</div>
+
+<!-- SECTION 1: PROGRAM OVERVIEW -->
+<div class="section" id="overview">
+  <h2 class="section-title">🏯 Program Overview</h2>
+  <p class="section-desc">"The warrior who knows the terrain moves through it with confidence." — Sensei 🎋</p>
+
+  <div class="belts">
+    <div class="belt" style="border-color: rgba(255,255,255,0.3)"><span class="belt-emoji">⬜</span><div class="belt-year">2026</div><div class="belt-title">White Belt — Foundation</div></div>
+    <div class="belt" style="border-color: rgba(255,200,0,0.4)"><span class="belt-emoji">🟡</span><div class="belt-year">2027</div><div class="belt-title">Yellow Belt — Building</div></div>
+    <div class="belt" style="border-color: rgba(90,184,122,0.4)"><span class="belt-emoji">🟢</span><div class="belt-year">2028</div><div class="belt-title">Green Belt — Clinical</div></div>
+    <div class="belt" style="border-color: rgba(90,154,224,0.4)"><span class="belt-emoji">🔵</span><div class="belt-year">2029</div><div class="belt-title">Blue Belt — Advanced</div></div>
+    <div class="belt" style="border-color: rgba(50,50,50,0.8); background: rgba(20,20,20,0.8)"><span class="belt-emoji">🖤</span><div class="belt-year">2030</div><div class="belt-title">Black Belt — Doctor</div></div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">🎓 Degree</div>
+      <div class="card-body"><div class="card-stat">D.AcOM</div>Doctor of Acupuncture & Oriental Medicine<br><span style="color:var(--gold);font-size:0.75rem">Dance Medicine Specialty</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📚 Total Credits</div>
+      <div class="card-body"><div class="card-stat">247</div>222 MAcHM (Foundational) + 25 Doctoral Advanced<br><span style="color:var(--text3);font-size:0.75rem">3,290 total hours</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🗓 Duration</div>
+      <div class="card-body"><div class="card-stat">4.5 yrs</div>Jan 2026 → Summer 2030<br><span style="color:var(--text3);font-size:0.75rem">19 quarters · 4 terms/year</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💰 Est. Total Cost</div>
+      <div class="card-body"><div class="card-stat">~$86K</div>$350 per credit<br><span style="color:var(--text3);font-size:0.75rem">Excludes books & fees</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏥 Clinical Hours</div>
+      <div class="card-body"><div class="card-stat">1,120+</div>Min. required clinical hours<br><span style="color:var(--text3);font-size:0.75rem">Includes CO, CI, CS, Doctoral Clinic</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💃 Dance Medicine</div>
+      <div class="card-body">Orthopedic Acupuncture · Tui Na · Sports Herbs · Mind-Body<br><span style="color:var(--gold);font-size:0.75rem">Virtually no competitors in this specialty niche</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <div class="card-title" style="margin-bottom:0.75rem; font-size:0.85rem; color:var(--gold)">📋 Curriculum Breakdown</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.5rem">
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🌿 East Asian Medicine</div><div style="color:var(--text);font-size:0.85rem">34 cr — EAM301→EAM460</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🪡 Acupuncture</div><div style="color:var(--text);font-size:0.85rem">35 cr — AC300→AC510</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🌱 Herbology</div><div style="color:var(--text);font-size:0.85rem">47 cr — HB310→HB550</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🩺 Biomedicine</div><div style="color:var(--text);font-size:0.85rem">50 cr — WM300→WM620</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">⚖️ Management/Ethics</div><div style="color:var(--text);font-size:0.85rem">10 cr — ME311→ME600</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🧘 Mind-Body</div><div style="color:var(--text);font-size:0.85rem">2 cr — TB300, TB301</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🎯 Electives</div><div style="color:var(--text);font-size:0.85rem">11 cr — Choose strategically</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🏥 Clinical Training</div><div style="color:var(--text);font-size:0.85rem">33 cr — CO/CI/CS</div></div>
+      <div class="card" style="padding:0.75rem"><div style="font-size:0.72rem;color:var(--text3)">🎓 Doctoral Advanced</div><div style="color:var(--text);font-size:0.85rem">25 cr — CM/IM/ME600</div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <div class="card-title" style="margin-bottom:0.75rem;font-size:0.85rem;color:var(--gold)">✅ Graduation Requirements</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0.4rem">
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">📚 Complete all 247 credits</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">📊 Minimum 3.0 cumulative GPA</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">🏥 1,120+ clinical hours</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">📝 Pass all 5 Phase Exams</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">🎓 Pass DAcHM Graduation Exam</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">💊 Current CPR/First Aid cert</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">🔒 Annual HIPAA/OSHA training</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">💉 CNT Certification (before CI510)</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">💻 EHR Training (before CO510)</div>
+      <div class="card" style="padding:0.6rem 0.75rem;font-size:0.78rem">💰 All financial obligations met</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: TIMELINE -->
+<div class="section" id="timeline">
+  <h2 class="section-title">🗓 Timeline 2026–2030</h2>
+  <p class="section-desc">Four academic terms per year. Each term = 10 weeks + 3-week break. 4 quarters/year × 4.75 years = 19 quarters.</p>
+
+  <div class="timeline">
+    <!-- YEAR 1 -->
+    <div class="tl-item">
+      <div class="tl-dot done"></div>
+      <div class="tl-year">⬜ 2026 — YEAR 1 — WHITE BELT — FOUNDATION</div>
+      <div class="tl-title">Winter 2026 (Jan 5 – Mar 15)</div>
+      <div class="tl-body">WM301 Biology/Biochem/Nutrition, WM300 Western Medical Terminology, EAM302 Basic Theory I (✅ completed)<br>
+        <span class="tl-badge badge-green">✅ COMPLETED</span><span class="tl-badge badge-gold">~9 credits</span><span class="tl-badge badge-blue">🟢 Light Load</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot done"></div>
+      <div class="tl-year">2026 — Q2</div>
+      <div class="tl-title">Spring 2026 (Apr 6 – Jun 14)</div>
+      <div class="tl-body">ME410 Medical Ethics, <strong style="color:var(--gold)">EAM303 Basic Theory II 🔑 MASTER KEY</strong>, WM340 A&P I, WM350 A&P II<br>
+        <span class="tl-badge badge-gold">~13 credits</span><span class="tl-badge badge-gold">🟡 Moderate — EAM303 is THE critical course</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot done"></div>
+      <div class="tl-year">2026 — Q3</div>
+      <div class="tl-title">Summer 2026 (Jul 6 – Sep 13)</div>
+      <div class="tl-body">EAM301 History of EM, WM360 A&P III, EAM310 Diagnosis I* (with Daniel), AC300 Acupuncture I: Channel Theory, TB300 Qi Gong<br>
+        <span class="tl-badge badge-gold">~14 credits</span><span class="tl-badge badge-gold">🟡 Moderate</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot current"></div>
+      <div class="tl-year">2026 — Q4 ← CURRENT ZONE</div>
+      <div class="tl-title">Fall 2026 (Oct 5 – Dec 13) 🔴</div>
+      <div class="tl-body">WM410 Pathophysiology I, AC310 Acupuncture II: Point Location A, EAM312 Diagnosis II, HB310 Herbology I<br>
+        <span class="tl-badge badge-red">🔴 Heavy — 4 demanding courses</span><span class="tl-badge badge-gold">Begin Phase Exam 1 prep NOW</span>
+      </div>
+    </div>
+    <!-- YEAR 2 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">🟡 2027 — YEAR 2 — YELLOW BELT — BUILDING</div>
+      <div class="tl-title">Winter 2027 (Jan 4 – Mar 14) 🔴</div>
+      <div class="tl-body">WM420 Pathophysiology II 🔑, AC320 Points B, ME420 Clinical Comm I, WM400 Research Methods, TB301 Tai Ji Quan<br>
+        <span class="tl-badge badge-red">🔴 Heavy</span><span class="tl-badge badge-red">WM420 gates 7 courses — PROTECT · Phase Exam 2 this intensive</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2027 — Q6</div>
+      <div class="tl-title">Spring 2027 (Apr 5 – Jun 13) 🟡</div>
+      <div class="tl-body">WM450 Physical Exam, AC410 Clinical Technique, AC330 Points A, HB410 Herbology II · Intensive: CO450* + Phase Exam 1<br>
+        <span class="tl-badge badge-gold">🟡 Moderate</span><span class="tl-badge badge-red">Phase Exam 1 + CO450 this intensive</span><span class="tl-badge badge-blue">CPR/HIPAA/OSHA required</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2027 — Q7</div>
+      <div class="tl-title">Summer 2027 (Jul 5 – Sep 12) 🟡</div>
+      <div class="tl-body">CO510 Obs I (1 shift/wk)*, WM480 Ortho/Neuro Eval, AC340 Points B, EAM320 Eastern Nutrition, Elective of choice<br>
+        <span class="tl-badge badge-gold">🟡 Moderate + Elective EL400 🇰🇷</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2027 — Q8</div>
+      <div class="tl-title">Fall 2027 (Oct 4 – Dec 12) 🟡</div>
+      <div class="tl-body">CO510 Obs I (1 shift/wk)*, WM530 Western IM III, AC420 Adv Clinical Techniques, ME520 Clinical Comm II<br>
+        <span class="tl-badge badge-gold">🟡 Moderate + Elective EL410 🇰🇷</span>
+      </div>
+    </div>
+    <!-- YEAR 3 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">🟢 2028 — YEAR 3 — GREEN BELT — CLINICAL</div>
+      <div class="tl-title">Winter 2028 (Jan – Mar) 🔴</div>
+      <div class="tl-body">CO520 Obs II (1 shift/wk)*, WM550 Red Flags, AC390 Treatment Planning, HB420 Herbology III, TB301 (if not taken) · Intensive: Phase Exam 2<br>
+        <span class="tl-badge badge-red">🔴 Heavy + Phase Exam 2 intensive</span><span class="tl-badge badge-red">CNT Cert required soon</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2028 — Q10</div>
+      <div class="tl-title">Spring 2028 (Apr – Jun) 🔴</div>
+      <div class="tl-body">CI510 Clinic Internship I (2 shifts/wk)* 🏥, AC510 Ortho Disorders, WM510 Western IM I, HB430 Herbology IV<br>
+        <span class="tl-badge badge-red">🔴 Heavy — First real clinic patients!</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2028 — Q11</div>
+      <div class="tl-title">Summer 2028 (Jul – Sep) 🔴🔴</div>
+      <div class="tl-body">CI510 Clinic Internship I (3 shifts/wk)*, CS000 (one day), CS510 (meets 3x), EAM430 Internal Med I, WM520 Western IM II, EAM440 Internal Med II · Intensive: Phase Exam 3<br>
+        <span class="tl-badge badge-red">🔴 VERY HEAVY — Hardest quarter!</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2028 — Q12</div>
+      <div class="tl-title">Fall 2028 (Oct – Dec) 🔴🔴</div>
+      <div class="tl-body">CI520 Clinic Internship II (3 shifts/wk)*, CS520, AC430 Microsystems, EAM460 Specialty Topics, WM610 Pharmacology · Intensive: Phase Exam 4<br>
+        <span class="tl-badge badge-red">🔴 Very Heavy + Phase Exam 4</span>
+      </div>
+    </div>
+    <!-- YEAR 4 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">🔵 2029 — YEAR 4 — BLUE BELT — ADVANCED</div>
+      <div class="tl-title">Winter 2029 (Jan – Mar) 🔴🔴</div>
+      <div class="tl-body">CI530 Clinic Internship III (3 shifts/wk)*, CS530, HB440 Formulas I, WM500 Microbiology, HB510 Formulas II<br>
+        <span class="tl-badge badge-red">🔴 Very Heavy — formula mastery + clinic</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2029 — Q14</div>
+      <div class="tl-title">Spring 2029 (Apr – Jun) 🟡</div>
+      <div class="tl-body">HB520 Formulas III, HB530 Formulas IV, WM400 Research Methods (if not taken), Elective of choice · Intensive: MAcHM Graduation Exam<br>
+        <span class="tl-badge badge-gold">🟡 Moderate</span><span class="tl-badge badge-blue">MAcHM Grad Exam this intensive</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2029 — Q15 ⭐</div>
+      <div class="tl-title">Summer 2029 (Jul – Sep) 🟡 — STUDY ABROAD WINDOW 🌏</div>
+      <div class="tl-body">HB540 Shang Han Lun, Elective of choice, AC460 Tui Na I, HB400 Special Topics Herbal · Intensive: Herbal Workshop<br>
+        <span class="tl-badge badge-gold">🌏 Study abroad window · no CI shifts</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2029 — Q16</div>
+      <div class="tl-title">Fall 2029 (Oct – Dec) 🔴</div>
+      <div class="tl-body">EAM450 Internal Med III, CM770 Reproductive Health, HB550 Adv Formula Study, ME311 Practice Mgmt & Billing<br>
+        <span class="tl-badge badge-red">🔴 Heavy — EAM450 + CM770 + HB550</span>
+      </div>
+    </div>
+    <!-- YEAR 5 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">🖤 2030 — YEAR 5 — BLACK BELT — DOCTORAL</div>
+      <div class="tl-title">Winter 2030 (Jan – Mar) 🔴🔴</div>
+      <div class="tl-body">CM700 Cancer Care, IM610 Collaborative Care, CI540 Clinic Internship IV (3 shifts/wk)*, CS540, WM620 Diagnostic Tests · Intensive: Phase Exam 5<br>
+        <span class="tl-badge badge-red">🔴 Very Heavy + Phase Exam 5</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2030 — Q18</div>
+      <div class="tl-title">Spring 2030 (Apr – Jun) 🔴</div>
+      <div class="tl-body">CI550 Clinic Internship V (3 shifts/wk)*, CS550, ME311 (if not taken), CM750 Orthopedics 🦵, IM600 Healthcare Systems · Intensive: MAcHM Grad Exam<br>
+        <span class="tl-badge badge-red">🔴 Heavy + Graduation Exam 🎓</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2030 — Q19 🎓</div>
+      <div class="tl-title">Summer 2030 — THE FINAL BOW 🎉</div>
+      <div class="tl-body">ME600 Adv Practice Management, CM740 Mental Health & Trauma, Elective of choice<br>
+        <span class="tl-badge badge-green">🟢 Light Load — GRADUATION SUMMER 2030</span><span class="tl-badge badge-blue">🏆 Doctor of Acupuncture & Oriental Medicine</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: PREREQUISITE CHAINS -->
+<div class="section" id="prereqs">
+  <h2 class="section-title">⛓ Prerequisite Chains</h2>
+  <p class="section-desc">"You cannot wield the sword before you have learned to hold it." — Sensei 🎋</p>
+
+  <div class="chain">
+    <div class="chain-title">🌿 Chain 1: East Asian Medicine Foundation — "The Root from Which All Branches Grow"</div>
+    <div class="chain-flow">
+      <span class="chain-node done">EAM302 ✅</span><span class="chain-arrow">→</span>
+      <span class="chain-node critical">EAM303 🔑</span><span class="chain-arrow">→</span>
+      <span class="chain-node">EAM310</span><span class="chain-arrow">→</span>
+      <span class="chain-node">EAM312</span><span class="chain-arrow">→</span>
+      <span class="chain-node">EAM430+440</span><span class="chain-arrow">→</span>
+      <span class="chain-node">EAM450</span>
+    </div>
+    <div style="margin-top:0.5rem; font-size:0.75rem; color:var(--text3)">
+      EAM303 also unlocks: HB310/410/420/430 (ALL simultaneously) · AC300 · EAM320 · TB300 · TB301<br>
+      EAM450 requires 6 courses simultaneously — the most prerequisites in the program
+    </div>
+  </div>
+
+  <div class="chain">
+    <div class="chain-title">🪡 Chain 2: Acupuncture Progression — "The Needle That Follows the Channel"</div>
+    <div class="chain-flow">
+      <span class="chain-node done">EAM302 ✅</span><span class="chain-arrow">→</span>
+      <span class="chain-node">AC300</span><span class="chain-arrow">→</span>
+      <span class="chain-node">AC310+AC320</span><span class="chain-arrow">→</span>
+      <span class="chain-node">AC330+AC340</span><span class="chain-arrow">→</span>
+      <span class="chain-node">AC390</span><span class="chain-arrow">→</span>
+      <span class="chain-node critical">AC510 🎯</span>
+    </div>
+    <div style="margin-top:0.4rem; font-size:0.75rem; color:var(--text3)">Also: AC320→AC410→AC420→AC430 (microsystems chain) · EAM312→AC460</div>
+  </div>
+
+  <div class="chain">
+    <div class="chain-title">🌱 Chain 3: Herbology Formula Chain — "The Four Pillars Before the Formulas Begin"</div>
+    <div class="chain-flow">
+      <span class="chain-node critical">HB310 🔑</span>
+      <span class="chain-node critical">HB410 🔑</span>
+      <span class="chain-node critical">HB420 🔑</span>
+      <span class="chain-node critical">HB430 🔑</span>
+      <span class="chain-arrow">→ ALL FOUR →</span>
+      <span class="chain-node">HB440+510+520+530</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-node critical">HB540+HB550 🔑</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-node">CI550</span>
+    </div>
+    <div style="margin-top:0.4rem; font-size:0.75rem; color:var(--text3)">All 4 single-herb courses must complete before ANY formula course. HB550 gates CI550 (final internship).</div>
+  </div>
+
+  <div class="chain">
+    <div class="chain-title">🩺 Chain 4: Western Medicine / Clinical Pathway</div>
+    <div class="chain-flow">
+      <span class="chain-node">WM340/350/360</span><span class="chain-arrow">→</span>
+      <span class="chain-node critical">WM420 🔑</span><span class="chain-arrow">→</span>
+      <span class="chain-node">WM480+WM450+WM530</span><span class="chain-arrow">→</span>
+      <span class="chain-node">WM500-WM550</span>
+    </div>
+    <div style="margin-top:0.4rem; font-size:0.75rem; color:var(--text3)">WM420 Pathophysiology II gates 7 downstream WM courses — never delay this course.</div>
+  </div>
+
+  <div class="chain">
+    <div class="chain-title">🏥 Chain 5: Clinical Observation → Internship — "The Sequential Performance"</div>
+    <div class="chain-flow">
+      <span class="chain-node">CPR+HIPAA+OSHA 🔒</span><span class="chain-arrow">→</span>
+      <span class="chain-node">CO450</span><span class="chain-arrow">→</span>
+      <span class="chain-node">CO510+CO520</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Phase Exam 2 ✅</span><span class="chain-arrow">→</span>
+      <span class="chain-node critical">CI510 🏥</span><span class="chain-arrow">→</span>
+      <span class="chain-node">CI520→CI530→CI540→CI550</span>
+    </div>
+    <div style="margin-top:0.4rem; font-size:0.75rem; color:var(--text3)">Also requires: CNT Certification before CI510. EHR Training before CO510. ME410 + ME420 before CO450.</div>
+  </div>
+
+  <div class="chain">
+    <div class="chain-title">🎓 Chain 6: Doctoral Courses — The Master Class</div>
+    <div class="chain-flow">
+      <span class="chain-node">CM700 Cancer Care</span>
+      <span class="chain-node">CM740 Mental Health</span>
+      <span class="chain-node">CM750 Orthopedics 🦵</span>
+      <span class="chain-node">CM770 Reproductive</span>
+      <span class="chain-node">IM600 Healthcare Systems</span>
+      <span class="chain-node">IM610 Collaborative Care</span>
+      <span class="chain-node">ME600 Adv Practice Mgmt</span>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem">
+    <div class="card-title" style="color:var(--gold);margin-bottom:0.5rem">🎯 Elective Strategy for Dance Medicine</div>
+    <div class="elective-row header">
+      <div>Quarter</div><div>Recommended Elective</div><div>Why</div>
+    </div>
+    <div class="elective-row"><div>Summer 2027</div><div>EL400 SaAm Acupuncture 🇰🇷</div><div>Korean specialty begins</div></div>
+    <div class="elective-row"><div>Fall 2027</div><div>EL410 Dong Ui Bo Gam 🇰🇷</div><div>Korean classical deepens</div></div>
+    <div class="elective-row"><div>Fall 2028</div><div>EL430 Jin Gui Yao Lue 🇨🇳</div><div>Pre-study abroad herb classics</div></div>
+    <div class="elective-row"><div>Spring 2029</div><div>EL420 Sa-sang Medicine 🇰🇷</div><div>Pre-abroad Korean medicine</div></div>
+    <div class="elective-row"><div>Spring 2030</div><div>EL500 Master Tung's 🎯</div><div>Dance medicine ortho specialty</div></div>
+    <div class="elective-row"><div>Summer 2030</div><div>EL551 Kiiko Matsumoto I 🎯</div><div>Final dance medicine elective</div></div>
+  </div>
+</div>
+
+<!-- SECTION 4: ALL 6 ACADEMIC PLANS -->
+<div class="section" id="plans">
+  <h2 class="section-title">📘 All 5 Academic Plans</h2>
+  <p class="section-desc">All five plans share the same Summer 2030 graduation date. Choose based on your life circumstances and risk tolerance.</p>
+
+  <div class="plans-tabs">
+    <div class="plan-tab active" onclick="showPlan('plan1')">⚖️ Plan 1: Balanced</div>
+    <div class="plan-tab" onclick="showPlan('plan2')">⚡ Plan 2: Accelerated</div>
+    <div class="plan-tab" onclick="showPlan('plan3')">🛡️ Plan 3: Conservative</div>
+    <div class="plan-tab" onclick="showPlan('plan5')">🔀 Plan 4: Flexible</div>
+    <div class="plan-tab" onclick="showPlan('plan6')">🌏 Plan 5: Study Abroad</div>
+  </div>
+
+  <div class="plan-content active" id="plan1">
+    <div class="quote"><p>⚖️ "The Foxtrot — smooth, forward, controlled. The warrior who trains at a sustainable pace arrives at the destination stronger than the one who sprinted and burned out." — Sensei 🎋</p></div>
+    <table class="plan-table">
+      <tr><th>Quarter</th><th>Key Courses</th><th>Credits</th><th>Load</th></tr>
+      <tr><td>Winter 2026</td><td>WM301, WM300, EAM302 ✅</td><td>~9</td><td class="load-light">🟢 Light ✅ Done</td></tr>
+      <tr><td>Spring 2026</td><td>ME410, <strong>EAM303 🔑</strong>, WM340, WM350</td><td>~13</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Summer 2026</td><td>EAM301, WM360, EAM310* (Daniel), AC300, TB300</td><td>~14</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Fall 2026</td><td>WM410, AC310, EAM312, HB310</td><td>~13</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Winter 2027</td><td>WM420 🔑, AC320, ME420, WM400, TB301 · Int: Phase Exam 2</td><td>~14</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Spring 2027</td><td>WM450, AC410, AC330, HB410 · Int: CO450* + Phase Exam 1</td><td>~13</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Summer 2027</td><td>CO510*(1 shift), WM480, AC340, EAM320, EL of choice</td><td>~14</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Fall 2027</td><td>CO510*(1 shift), WM530, AC420, ME520</td><td>~12</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Winter 2028</td><td>CO520*(1 shift), WM550, AC390, HB420, TB301 · Int: Phase Exam 2</td><td>~13</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Spring 2028</td><td>CI510*(2 shifts), AC510, WM510, HB430</td><td>~14</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Summer 2028</td><td>CI510*(3 shifts), CS000, CS510, EAM430, WM520, EAM440 · Int: Phase Exam 3</td><td>~18</td><td class="load-heavy">🔴 VERY Heavy</td></tr>
+      <tr><td>Fall 2028</td><td>CI520*(3 shifts), CS520, AC430, EAM460, WM610 · Int: Phase Exam 4</td><td>~16</td><td class="load-heavy">🔴 Very Heavy</td></tr>
+      <tr><td>Winter 2029</td><td>CI530*(3 shifts), CS530, HB440, WM500, HB510</td><td>~17</td><td class="load-heavy">🔴 Very Heavy</td></tr>
+      <tr><td>Spring 2029</td><td>HB520, HB530, WM400 (or EL), EL of choice · Int: MAcHM Grad Exam</td><td>~12</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Summer 2029</td><td>HB540, EL of choice, AC460, HB400 · Int: Herbal Workshop 🌏</td><td>~13</td><td class="load-mod">🟡 Mod</td></tr>
+      <tr><td>Fall 2029</td><td>EAM450, CM770, HB550, ME311</td><td>~14</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Winter 2030</td><td>CM700, IM610, CI540*(3 shifts), CS540, WM620 · Int: Phase Exam 5</td><td>~16</td><td class="load-heavy">🔴 Very Heavy</td></tr>
+      <tr><td>Spring 2030</td><td>CI550*(3 shifts), CS550, ME311, CM750, IM600 · Int: Grad Exam 🎓</td><td>~16</td><td class="load-heavy">🔴 Heavy</td></tr>
+      <tr><td>Summer 2030</td><td>ME600, CM740, EL of choice — THE FINAL BOW 🎉</td><td>~8</td><td class="load-light">🟢 Light</td></tr>
+    </table>
+  </div>
+
+  <div class="plan-content" id="plan2">
+    <div class="quote"><p>⚡ "The Mambo — high energy, full commitment, maximum power. The warrior who trains twice as hard rests twice as easy. But one stumble costs more here." — Sensei 🎋</p></div>
+    <div class="cards">
+      <div class="card"><div class="card-title">Key Difference from Plan 1</div><div class="card-body">TB300 moved to Winter 2027 (earlier). Heavier credit loads per quarter. Maximum front-loading of electives. Same Summer 2030 graduation.</div></div>
+      <div class="card"><div class="card-title">✅ Pros</div><div class="card-body">Banks credits early · More elective freedom later · Demonstrates academic strength · Best for high-energy quarters</div></div>
+      <div class="card"><div class="card-title">❌ Cons / Risks</div><div class="card-body">High burnout risk · GPA more vulnerable · Less flexibility for life disruptions · Very heavy quarters throughout 2028</div></div>
+      <div class="card"><div class="card-title">💃 Dance Verdict</div><div class="card-body">The Mambo — powerful but demanding. Only pursue if you have assessed your stamina honestly and have zero major life disruptions expected.</div></div>
+    </div>
+  </div>
+
+  <div class="plan-content" id="plan3">
+    <div class="quote"><p>🛡️ "The Willow Path — bends but never breaks. Same destination, more breathing room. The warrior who finishes always wins." — Sensei 🎋</p></div>
+    <table class="plan-table">
+      <tr><th>Key Difference</th><th>Plan 1</th><th>Plan 3 (Conservative)</th></tr>
+      <tr><td>Fall 2026 Load</td><td class="load-heavy">🔴 Heavy (15 cr)</td><td class="load-mod">🟡 Moderate (11 cr)</td></tr>
+      <tr><td>HB310 Placement</td><td>Fall 2026</td><td><strong>Winter 2027</strong></td></tr>
+      <tr><td>TB300 Placement</td><td>Winter 2028</td><td><strong>Summer 2029 — with TB301</strong></td></tr>
+      <tr><td>Summer 2028 Load</td><td class="load-heavy">🔴 Very Heavy (19 cr)</td><td class="load-heavy">🔴 Heavy (15 cr)</td></tr>
+      <tr><td>Winter 2029 Load</td><td class="load-heavy">🔴 Very Heavy (16 cr)</td><td class="load-heavy">🔴 Heavy (13 cr)</td></tr>
+      <tr><td>Summer 2029</td><td class="load-mod">🟡 Moderate</td><td class="load-light">🟢 Light — most peaceful quarter</td></tr>
+      <tr><td>Overall Risk</td><td class="load-mod">🟡 Low-Medium</td><td class="load-light">🟢 Very Low</td></tr>
+      <tr><td>Graduation</td><td>Summer 2030</td><td>Summer 2030 ✅ identical</td></tr>
+    </table>
+  </div>
+
+  <div class="plan-content" id="plan5">
+    <div class="quote"><p>🔀 "The East Coast Swing — bounce, release, return. The Flexible Plan is not a plan you choose — it is a plan you always have. Every warrior carries it in their back pocket." — Sensei 🎋</p></div>
+    <div class="cards">
+      <div class="card"><div class="card-title">What Plan 4 Is</div><div class="card-body">A complete alternative course map that runs as a safety net beneath ALL other plans. Activates automatically when any primary course is disrupted.</div></div>
+      <div class="card"><div class="card-title">✅ Pros</div><div class="card-body">Maximum flexibility · Every alternative is a lateral swap · Works seamlessly with Plans 1-3 · Summer 2030 graduation confirmed</div></div>
+      <div class="card"><div class="card-title">Four Backup Philosophies</div><div class="card-body">1. Lateral Swap (never delay when you can swap) · 2. Conservative Shift (shift to Plan 3) · 3. Gap Protocol (fill slot with available) · 4. Intensive Recovery (use 3-week breaks)</div></div>
+      <div class="card"><div class="card-title">Emergency Protocols</div><div class="card-body">Medical emergency → medical leave · Financial hardship → payment plans · GPA below 3.0 → reduce load immediately · Course unavailable → lateral swap or next quarter</div></div>
+    </div>
+  </div>
+
+  <div class="plan-content" id="plan6">
+    <div class="quote"><p>🌏 "The Journey Path — International Style. To understand the medicine, one must walk the land from which it came. Same Summer 2030 graduation — deeper soul." — Sensei 🎋</p></div>
+    <table class="plan-table">
+      <tr><th>Element</th><th>Plans 1-4</th><th>Plan 5 🌏 Journey</th></tr>
+      <tr><td>Study Abroad</td><td>Optional/unplanned</td><td class="load-light">✅ Summer 2029 — fully integrated</td></tr>
+      <tr><td>Korean Electives</td><td>Optional</td><td class="load-light">✅ EL400, EL410, EL420 — mapped</td></tr>
+      <tr><td>Chinese Classical</td><td>Optional</td><td class="load-light">✅ EL430, EL510 — mapped</td></tr>
+      <tr><td>Dance Medicine ELs</td><td>Optional</td><td class="load-light">✅ EL500, EL551 — mapped</td></tr>
+      <tr><td>Language Prep</td><td>Optional</td><td class="load-light">✅ Korean + Mandarin structured</td></tr>
+      <tr><td>Best Window</td><td>N/A</td><td class="load-light">🥇 Summer 2029 — no clinical shifts</td></tr>
+      <tr><td>2nd Best Window</td><td>N/A</td><td class="load-mod">🥈 Spring 2029 — no clinical shifts</td></tr>
+      <tr><td>Market Position</td><td>General practitioner</td><td class="load-light">✅ Dancer-healer who walked the land</td></tr>
+      <tr><td>Graduation</td><td>Summer 2030</td><td class="load-light">✅ Summer 2030 — identical</td></tr>
+      <tr><td>AVOID</td><td>N/A</td><td class="load-heavy">❌ Summer 2028 / Winter 2029 / Winter 2030</td></tr>
+    </table>
+    <div style="margin-top:1rem">
+      <div class="card-title" style="color:var(--gold);margin-bottom:0.5rem">📅 Study Abroad Timeline</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.4rem;font-size:0.78rem">
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Fall 2026</span><br>Begin Korean + Mandarin (HelloChinese, 10min/day)</div>
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Fall 2027</span><br>Confirm credit transfer policy with advisor</div>
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Winter 2028</span><br>Apply for study abroad scholarships</div>
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Spring 2028</span><br>Submit study abroad application</div>
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Fall 2028</span><br>Confirm placement — arrange housing</div>
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Winter 2029</span><br>Book flights — finalize logistics</div>
+        <div class="card" style="padding:0.6rem; border-color:var(--border2)"><span style="color:var(--gold)">Summer 2029</span><br>🌏 STUDY ABROAD — KOREA OR CHINA</div>
+        <div class="card" style="padding:0.6rem"><span style="color:var(--text3)">Fall 2029</span><br>Apply learning to EAM450 + CM770</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: PROGRESS TRACKER -->
+<div class="section" id="tracker">
+  <h2 class="section-title">📊 Progress Tracker</h2>
+  <p class="section-desc">Check off courses and milestones as you complete them. Your progress saves automatically.</p>
+
+  <!-- SYNC BAR -->
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;padding:0.85rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px;">
+    <span style="font-size:0.78rem;color:var(--text3);flex:1;min-width:160px;">📲 Sync progress between devices</span>
+    <button onclick="exportProgress()" style="background:var(--gold3);color:#fff;border:none;padding:0.4rem 1rem;border-radius:4px;cursor:pointer;font-size:0.78rem;font-family:Georgia,serif;">📤 Export Code</button>
+    <button onclick="showImport()" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);padding:0.4rem 1rem;border-radius:4px;cursor:pointer;font-size:0.78rem;font-family:Georgia,serif;">📥 Import Code</button>
+    <div id="export-box" style="display:none;width:100%;margin-top:0.6rem;">
+      <div style="font-size:0.72rem;color:var(--text3);margin-bottom:0.3rem;">Copy this code → paste it on your other device using Import Code:</div>
+      <textarea id="export-text" readonly onclick="this.select()" style="width:100%;height:64px;background:var(--bg3);color:var(--gold2);border:1px solid var(--border2);border-radius:4px;padding:0.5rem;font-size:0.7rem;font-family:monospace;resize:none;"></textarea>
+      <button onclick="copyCode()" style="margin-top:0.4rem;background:var(--bg4);color:var(--text2);border:1px solid var(--border);padding:0.3rem 0.75rem;border-radius:4px;cursor:pointer;font-size:0.72rem;font-family:Georgia,serif;">Copy to Clipboard</button>
+      <span id="copy-confirm" style="display:none;color:var(--green);font-size:0.72rem;margin-left:0.5rem;">✓ Copied!</span>
+    </div>
+    <div id="import-box" style="display:none;width:100%;margin-top:0.6rem;">
+      <div style="font-size:0.72rem;color:var(--text3);margin-bottom:0.3rem;">Paste the export code from your other device:</div>
+      <textarea id="import-text" placeholder="Paste code here..." style="width:100%;height:64px;background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:4px;padding:0.5rem;font-size:0.7rem;font-family:monospace;resize:none;"></textarea>
+      <button onclick="importProgress()" style="margin-top:0.4rem;background:var(--gold3);color:#fff;border:none;padding:0.3rem 0.75rem;border-radius:4px;cursor:pointer;font-size:0.72rem;font-family:Georgia,serif;">Apply & Save</button>
+      <span id="import-confirm" style="display:none;font-size:0.72rem;margin-left:0.5rem;"></span>
+    </div>
+  </div>
+
+  <div id="tracker-overall" style="margin-bottom:1.5rem">
+    <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.4rem">
+      <span>Overall Completion</span><span id="total-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="total-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">🔒 Mandatory Certifications (Complete Before Spring 2027)</div>
+    <div class="tracker-items" id="group-certs"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-certs" style="width:0%"></div></div>
+  </div>
+
+  <!-- Year 1 -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">⬜ Year 1 Courses — 2026</div>
+    <div class="tracker-items" id="group-y1"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-y1" style="width:0%"></div></div>
+  </div>
+
+  <!-- Year 2 -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">🟡 Year 2 Courses — 2027</div>
+    <div class="tracker-items" id="group-y2"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-y2" style="width:0%"></div></div>
+  </div>
+
+  <!-- Year 3 -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">🟢 Year 3 Courses — 2028</div>
+    <div class="tracker-items" id="group-y3"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-y3" style="width:0%"></div></div>
+  </div>
+
+  <!-- Year 4 -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">🔵 Year 4 Courses — 2029</div>
+    <div class="tracker-items" id="group-y4"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-y4" style="width:0%"></div></div>
+  </div>
+
+  <!-- Year 5 -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">🖤 Year 5 Courses — 2030</div>
+    <div class="tracker-items" id="group-y5"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-y5" style="width:0%"></div></div>
+  </div>
+
+  <!-- Phase Exams -->
+  <div class="tracker-group">
+    <div class="tracker-group-title">📝 Phase Exams & Graduation</div>
+    <div class="tracker-items" id="group-exams"></div>
+    <div class="tracker-bar"><div class="tracker-bar-fill" id="bar-exams" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- SECTION 6: RISKS & BOTTLENECKS -->
+<div class="section" id="risks">
+  <h2 class="section-title">⚠️ Risks & Bottlenecks</h2>
+  <p class="section-desc">"The warrior who knows every danger on the battlefield moves through it with confidence." — Sensei 🎋</p>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot critical">🔑</div><div class="risk-label">CRITICAL</div></div>
+    <div class="risk-content">
+      <div class="risk-title">EAM303 — The Root Gate (Spring 2026)</div>
+      <div class="risk-desc">Gates ALL herbology (HB310-HB550) AND multiple EAM courses. The single most important course in Year 1. If failed or delayed, the entire program cascades forward by multiple quarters.</div>
+      <div class="risk-action">⚔️ Action: Take Spring 2026. Never delay under any circumstance. Dedicate 60% of study time to this course.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot critical">🔒</div><div class="risk-label">CRITICAL</div></div>
+    <div class="risk-content">
+      <div class="risk-title">CPR / HIPAA / OSHA / EHR Certifications — Invisible Gates</div>
+      <div class="risk-desc">These are hard stops. CPR/HIPAA/OSHA required BEFORE CO450 (Spring 2027). EHR required BEFORE CO510. CNT Certification required BEFORE CI510 (Spring 2028). Missing any one blocks clinical entry completely.</div>
+      <div class="risk-action">⚔️ Action: Complete CPR/HIPAA/OSHA NOW — set calendar reminders for annual renewals.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot critical">📝</div><div class="risk-label">CRITICAL</div></div>
+    <div class="risk-content">
+      <div class="risk-title">Phase Exam 1 — Gates Entire Clinical Career (Spring 2027)</div>
+      <div class="risk-desc">Must pass Phase Exam 1 before CO450 clinical observation. If failed, entire internship chain delays by one quarter minimum. The Mambo break that never comes — everything stalls.</div>
+      <div class="risk-action">⚔️ Action: Begin Phase Exam 1 prep in Fall 2026 — two full quarters in advance. Treat every midterm as PE1 practice.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot critical">🌿</div><div class="risk-label">CRITICAL</div></div>
+    <div class="risk-content">
+      <div class="risk-title">HB310 + HB410 + HB420 + HB430 — All Four Before Any Formula</div>
+      <div class="risk-desc">ALL four single-herb courses must complete before HB440/510/520/530. Each delay in any one of the four cascades into the formulas sequence. HB550 gates CI550 — the final internship.</div>
+      <div class="risk-action">⚔️ Action: Spread HB310→HB430 carefully across Fall 2026–Spring 2028. Never skip one.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot critical">🏥</div><div class="risk-label">CRITICAL</div></div>
+    <div class="risk-content">
+      <div class="risk-title">Summer 2028 — The Hardest Quarter in the Program</div>
+      <div class="risk-desc">CI510 (3 clinical shifts/week) + EAM430 Internal Medicine I + EAM440 Internal Medicine II + HB440 Formulas I = ~19 credits. The most demanding quarter in the entire program. Zero flexibility.</div>
+      <div class="risk-action">⚔️ Action: Preview EAM430/440 during Spring 2028 break. Build weekly recovery routine. Do NOT add electives this quarter.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot high">🔑</div><div class="risk-label">HIGH</div></div>
+    <div class="risk-content">
+      <div class="risk-title">WM420 Pathophysiology II — Gates 7 Courses (Winter 2027)</div>
+      <div class="risk-desc">WM420 opens WM480, WM450, WM530, WM500, WM510, WM520, and WM550 simultaneously. Miss it and 7 doors stay closed for one full quarter.</div>
+      <div class="risk-action">⚔️ Action: Take Winter 2027. Never delay. This is as important as EAM303 for the Western Medicine track.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot high">📊</div><div class="risk-label">HIGH</div></div>
+    <div class="risk-content">
+      <div class="risk-title">GPA Below 3.0 — Academic Probation Trigger</div>
+      <div class="risk-desc">Hard minimum GPA is 3.0. Academic probation can affect financial aid, clinical eligibility, and graduation timeline. The 🔴 heavy quarters of 2028 are highest risk.</div>
+      <div class="risk-action">⚔️ Action: Monitor GPA every quarter. If approaching 3.2 — reduce elective load immediately. Never wait until after it drops below 3.0.</div>
+    </div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-level"><div class="risk-dot medium">📅</div><div class="risk-label">MEDIUM</div></div>
+    <div class="risk-content">
+      <div class="risk-title">Course Availability — Some Courses Offered Once Per Year</div>
+      <div class="risk-desc">Some courses are only offered in specific quarters. Missing registration means waiting a full year. The music only plays once — miss it and wait.</div>
+      <div class="risk-action">⚔️ Action: Register on the FIRST day of open registration every quarter. Set calendar reminders for all registration windows.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: STUDY ABROAD -->
+<div class="section" id="abroad">
+  <h2 class="section-title">🌏 Study Abroad</h2>
+  <p class="section-desc">"To understand the medicine, one must walk the land from which it came. The channels become real when you walk the streets of Seoul or Beijing." — Sensei 🎋</p>
+
+  <div class="abroad-grid">
+    <div class="abroad-card">
+      <div class="abroad-flag">🇰🇷</div>
+      <div class="abroad-title">South Korea — Korean Medicine</div>
+      <div class="abroad-item"><span>Primary Specialty</span><span>Sa-Am, Sa-sang, Dong Ui Bo Gam</span></div>
+      <div class="abroad-item"><span>Prep Electives</span><span>EL400, EL410, EL420</span></div>
+      <div class="abroad-item"><span>Language</span><span>Korean (Soohyeon + Suzie, 2x/wk)</span></div>
+      <div class="abroad-item"><span>Institutions</span><span>Kyung Hee University area programs</span></div>
+      <div class="abroad-item"><span>Dance Connection</span><span>Rhythm channels (Kidney, Bladder, GB)</span></div>
+    </div>
+    <div class="abroad-card">
+      <div class="abroad-flag">🇨🇳</div>
+      <div class="abroad-title">China — Classical TCM</div>
+      <div class="abroad-item"><span>Primary Specialty</span><span>Classical TCM, Jin Gui, Wen Bing</span></div>
+      <div class="abroad-item"><span>Prep Electives</span><span>EL430, EL440, EL510</span></div>
+      <div class="abroad-item"><span>Language</span><span>Mandarin (HelloChinese, 10min/day)</span></div>
+      <div class="abroad-item"><span>Institutions</span><span>Beijing/Shanghai TCM University area</span></div>
+      <div class="abroad-item"><span>Dance Connection</span><span>Smooth channels (Lung, Liver, Heart, Stomach)</span></div>
+    </div>
+    <div class="abroad-card">
+      <div class="abroad-flag">💃</div>
+      <div class="abroad-title">Study Abroad Goals</div>
+      <div class="abroad-item"><span>Primary</span><span>Clinical immersion in source tradition</span></div>
+      <div class="abroad-item"><span>Secondary</span><span>Language fluency for specialist texts</span></div>
+      <div class="abroad-item"><span>Tertiary</span><span>Professional network — international colleagues</span></div>
+      <div class="abroad-item"><span>Dance Medicine</span><span>Learn how Korean/Chinese healers treat performers</span></div>
+      <div class="abroad-item"><span>Credit Transfer</span><span>Confirm policy with advisor by Fall 2027</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <div class="card-title" style="color:var(--gold);margin-bottom:0.5rem">🏆 Study Abroad Windows — Ranked</div>
+    <table class="window-table">
+      <tr><th>Rank</th><th>Window</th><th>Why Ideal</th><th>Risk</th></tr>
+      <tr><td>🥇 BEST</td><td><strong style="color:var(--gold)">Summer 2029</strong></td><td>No clinical shifts · HB540 aligns with herbal immersion · TB300 flexible slot</td><td class="load-light">🟢 Low</td></tr>
+      <tr><td>🥈 GREAT</td><td>Spring 2029</td><td>No clinical shifts · formula courses align with herbal immersion</td><td class="load-light">🟢 Low</td></tr>
+      <tr><td>🥉 GOOD</td><td>Summer 2027</td><td>Moderate load · CO510 is only 1 shift/week · with advisor approval</td><td class="load-mod">🟡 Medium</td></tr>
+      <tr><td>🎯 POSSIBLE</td><td>Any 3-week break</td><td>Short but impactful cultural immersion trips</td><td class="load-light">🟢 Low</td></tr>
+      <tr><td>❌ AVOID</td><td>Summer 2028</td><td>CI510 (3 shifts) + EAM430 + EAM440 = overwhelming</td><td class="load-heavy">🔴 High</td></tr>
+      <tr><td>❌ AVOID</td><td>Winter 2029</td><td>CI530 (3 shifts) + HB440 + HB510 = too heavy</td><td class="load-heavy">🔴 High</td></tr>
+      <tr><td>❌ AVOID</td><td>Winter 2030</td><td>CI540 + Phase Exam 5 = never leave before championship</td><td class="load-heavy">🔴 High</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 8: DOCTORAL PILLARS -->
+<div class="section" id="doctoral">
+  <h2 class="section-title">🎓 Doctoral Pillars: Research, Mentorship & Teaching</h2>
+  <p class="section-desc">The three pillars that transform a master-level clinician into a doctoral-level scholar-practitioner. These run alongside your clinical and didactic work in Years 3–5.</p>
+
+  <!-- OVERVIEW CARDS -->
+  <div class="cards" style="margin-bottom:1.5rem">
+    <div class="card" style="border-color:rgba(201,168,76,0.5)">
+      <div class="card-title">🔬 Research Track</div>
+      <div class="card-body">
+        <div style="font-size:1.1rem;color:var(--gold);margin-bottom:0.4rem">RS700 + RS710 + CI810</div>
+        Evidence-based medicine · Capstone paper · Peer-review publication standard<br>
+        <span style="color:var(--text3);font-size:0.75rem">~19.5 credits · 198 hours total</span>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(90,154,224,0.5)">
+      <div class="card-title">🤝 Mentorship Track</div>
+      <div class="card-body">
+        <div style="font-size:1.1rem;color:var(--gold);margin-bottom:0.4rem">CI830</div>
+        Specialized learning with a veteran practitioner · Dance medicine focus possible<br>
+        <span style="color:var(--text3);font-size:0.75rem">7.5 credits · 150 clinical hours</span>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(90,184,122,0.5)">
+      <div class="card-title">🏫 Teaching & Advising Track</div>
+      <div class="card-body">
+        <div style="font-size:1.1rem;color:var(--gold);margin-bottom:0.4rem">CI840</div>
+        Faculty assistant in master's program · Clinic advisor · Role modeling<br>
+        <span style="color:var(--text3);font-size:0.75rem">9 credits · 180 clinical hours</span>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(224,120,64,0.5)">
+      <div class="card-title">🏥 Doctoral Clinic</div>
+      <div class="card-body">
+        <div style="font-size:1.1rem;color:var(--gold);margin-bottom:0.4rem">CI820</div>
+        Independent patient care · Weekly case reports · Clinical decision documentation<br>
+        <span style="color:var(--text3);font-size:0.75rem">9 credits · 180 clinical hours</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH DEEP DIVE -->
+  <div class="chain" style="margin-bottom:1rem">
+    <div class="chain-title">🔬 Research Pillar — The Capstone Journey</div>
+    <div class="chain-flow" style="margin-bottom:0.75rem">
+      <span class="chain-node critical">RS700 Research I</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-node critical">RS710 Research II</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-node critical">CI810 Capstone Writing</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-node">PA720 Oral Defense</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-node done">Publication-Ready Paper 🏆</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem;font-size:0.78rem">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">RS700 — Research I</div>
+        <div style="color:var(--text3)">2.4 cr · 24 hrs · No prereqs</div>
+        <div style="color:var(--text2);margin-top:0.2rem">Evidence-based medicine · Literature evaluation · Significance of research in EAM</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">RS710 — Research II</div>
+        <div style="color:var(--text3)">2.4 cr · 24 hrs · Prereq: RS700</div>
+        <div style="color:var(--text2);margin-top:0.2rem">Research design · Methodology · Qualitative & quantitative analysis · Critical thinking</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">CI810 — Capstone Paper Writing</div>
+        <div style="color:var(--text3)">7.5 cr · 150 hrs · Prereq: RS700</div>
+        <div style="color:var(--text2);margin-top:0.2rem">Phase I: Proposal · Phase II: Development · Written in peer-review format · Defense before Doctoral Research Committee</div>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(201,168,76,0.07);border-left:3px solid var(--gold3);padding:0.6rem 0.75rem;border-radius:0 4px 4px 0;font-size:0.78rem;color:var(--text2)">
+      ⚠️ <strong style="color:var(--gold)">Critical deadline:</strong> You must meet with the program director <em>no later than the end of your 1st year</em> (by Summer 2026) to determine your capstone research topic and mentor. Topic idea for Dance Medicine: <em>"Acupuncture for Lower Limb Injury Prevention in Competitive Ballroom Dancers — A Clinical Case Series."</em> If the capstone is exceptional and published in a recognized journal, you receive an <strong style="color:var(--gold2)">Honored Doctoral Degree</strong>.
+    </div>
+  </div>
+
+  <!-- PROFESSIONAL ADVANCEMENT -->
+  <div class="chain" style="margin-bottom:1rem">
+    <div class="chain-title">🎤 Professional Advancement — Oral Presentation Series</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.5rem;font-size:0.78rem">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">PA700 — Professional Advancement I</div>
+        <div style="color:var(--text3)">2.4 cr · 24 hrs</div>
+        <div style="color:var(--text2);margin-top:0.2rem">Medical necessity · Evidence-based practice · Insurance communication · Oral case presentation</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">PA710 — Professional Advancement II</div>
+        <div style="color:var(--text3)">2.4 cr · 24 hrs</div>
+        <div style="color:var(--text2);margin-top:0.2rem">Collaboration with MDs · Legal/ethical issues · Public health · Referral networks</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">PA720 — Professional Advancement III</div>
+        <div style="color:var(--text3)">2.4 cr · 24 hrs · Scheduled Q8</div>
+        <div style="color:var(--text2);margin-top:0.2rem">Oral presentation of capstone project · PowerPoint submitted 1 week prior · Q&A before Doctoral Research Committee · Pass/Fail</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENTORSHIP DEEP DIVE -->
+  <div class="chain" style="margin-bottom:1rem">
+    <div class="chain-title">🤝 CI830 Mentorship — Your Dance Medicine Specialist Pathway</div>
+    <div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.75rem">7.5 credits · 150 hours · On or off-campus · Graded Pass/Fail · No prerequisites</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.5rem;font-size:0.78rem">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">What It Is</div>
+        <div style="color:var(--text2)">Guided learning with a veteran healthcare professional (terminal degree + 10+ years experience). Systematic, interactive skill-building in your specialty area. Can be done on or off VUIM campus.</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">Dance Medicine Opportunity 💃</div>
+        <div style="color:var(--text2)">Seek a mentor who specializes in sports medicine, orthopedic acupuncture, or performing arts medicine. A physical therapist or MD specializing in dancers at a DC-area ballet or dance company would be ideal.</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">Deliverables Required</div>
+        <div style="color:var(--text2)">Log sheet of hours and learning activities · Mentor evaluation report · Application must be approved by Doctoral Dean before starting · Submit TA Request Form</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">Competency Areas</div>
+        <div style="color:var(--text2)">Advanced OM knowledge · Biomedicine integration · Integrative medicine practice · Various modalities · Collaboration with healthcare professionals · Scientific writing</div>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(90,154,224,0.07);border-left:3px solid rgba(90,154,224,0.5);padding:0.6rem 0.75rem;border-radius:0 4px 4px 0;font-size:0.78rem;color:var(--text2)">
+      💡 <strong style="color:var(--blue)">Strategy:</strong> Start identifying a potential dance medicine mentor by <strong>Winter 2028</strong> when CI510 begins and you have real clinical cases to discuss. Target a mentor connected to the DC/Virginia performing arts or professional dance world — Washington Ballet, Kennedy Center performers, or a sports medicine clinic that works with dancers.
+    </div>
+  </div>
+
+  <!-- TEACHING & ADVISING -->
+  <div class="chain" style="margin-bottom:1rem">
+    <div class="chain-title">🏫 CI840 Teaching & Advising — Becoming the Professor</div>
+    <div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.75rem">9 credits · 180 hours · As assistant to faculty in master's program · No prerequisites</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.5rem;font-size:0.78rem">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">What You Do</div>
+        <div style="color:var(--text2)">Serve as Teaching Assistant in didactic and clinical sections of the MAcHM program. Lead discussions, observe clinical sessions, grade intakes, role model professional behavior.</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">TA Responsibilities</div>
+        <div style="color:var(--text2)">Write patient intakes · Lead group case discussions · Answer student questions · Grade diaries under faculty supervision · Play mock patient · Monitor online sessions</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">How to Apply</div>
+        <div style="color:var(--text2)">Submit Student TA Request Form before the start of the quarter · Must be approved by faculty member + Program Director + Registrar · Request must be submitted per quarter</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">Dance Medicine Value 💃</div>
+        <div style="color:var(--text2)">TA for EAM310, AC510 (Orthopedics), or CM750 to deepen your own mastery of the subjects most relevant to treating dancers. Teaching is the highest form of learning.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCTORAL CLINIC -->
+  <div class="chain" style="margin-bottom:1rem">
+    <div class="chain-title">🏥 CI820 Doctoral Clinic — Independent Practice</div>
+    <div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.75rem">9 credits · 180 hours · VUIM teaching clinic · Independent patient care · No prerequisites</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.5rem;font-size:0.78rem">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">How It Works</div>
+        <div style="color:var(--text2)">You treat patients independently. Consult Clinical Advisor only when difficulties arise. Present a case efficiently at the end of each shift.</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.6rem">
+        <div style="color:var(--gold2);margin-bottom:0.3rem">Required Each Quarter</div>
+        <div style="color:var(--text2)">Detailed written patient care report per quarter · Must include: clinical decision-making, treatment plan, and supporting literature citations</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCTORAL TIMELINE -->
+  <div style="margin-top:1rem">
+    <div class="card-title" style="color:var(--gold);margin-bottom:0.75rem">📅 Doctoral Pillar Timeline — When to Do What</div>
+    <table class="plan-table">
+      <tr><th>When</th><th>Milestone</th><th>Pillar</th><th>Priority</th></tr>
+      <tr><td>By Summer 2026 🔴</td><td>Meet program director — confirm capstone topic &amp; mentor</td><td>🔬 Research</td><td class="load-heavy">Critical — end of Year 1 deadline</td></tr>
+      <tr><td>Year 2 (2027)</td><td>RS700 Research I — evidence-based medicine foundation</td><td>🔬 Research</td><td class="load-mod">Plan alongside PA700/PA710</td></tr>
+      <tr><td>Year 2–3</td><td>PA700, PA710 Professional Advancement I &amp; II</td><td>🎤 Oral Presentation</td><td class="load-mod">Case presentation skills</td></tr>
+      <tr><td>Year 3 (2028)</td><td>RS710 Research II — methodology &amp; design</td><td>🔬 Research</td><td class="load-mod">Prereq: RS700</td></tr>
+      <tr><td>Year 3 (2028)</td><td>Begin identifying dance medicine mentor for CI830</td><td>🤝 Mentorship</td><td class="load-mod">Start networking Winter 2028</td></tr>
+      <tr><td>Year 3–4</td><td>CI820 Doctoral Clinic — independent patient care</td><td>🏥 Clinic</td><td class="load-heavy">Weekly case reports required</td></tr>
+      <tr><td>Year 3–5</td><td>CI840 Teaching &amp; Advising — TA in master's courses</td><td>🏫 Teaching</td><td class="load-mod">Submit TA form each quarter</td></tr>
+      <tr><td>Year 4 (2029)</td><td>CI810 Capstone Paper Writing — full development</td><td>🔬 Research</td><td class="load-heavy">150 hours · peer-review format</td></tr>
+      <tr><td>Year 4 (2029)</td><td>CI830 Mentorship — dance medicine specialist</td><td>🤝 Mentorship</td><td class="load-mod">150 hours · on/off campus</td></tr>
+      <tr><td>End of Year 4</td><td>PA720 — Oral defense of capstone before Doctoral Research Committee</td><td>🎤 Defense</td><td class="load-heavy">PowerPoint due 1 week prior</td></tr>
+      <tr><td>Year 5 (2030)</td><td>Finalize capstone · Submit for publication if outstanding</td><td>🔬 Research</td><td class="load-heavy">Honored Doctoral Degree if published</td></tr>
+    </table>
+  </div>
+
+  <div class="quote" style="margin-top:1.25rem">
+    <p>💃 "You are not just a practitioner who treats dancers — you are a dancer who researches, teaches, and heals. The capstone is not a hurdle. It is your first contribution to the field that has never had someone like you in it." — Sensei 🎋</p>
+  </div>
+</div>
+
+<!-- SECTION 9: FINAL RECOMMENDATIONS -->
+<div class="section" id="recommendations">
+  <h2 class="section-title">🏆 Final Recommendations</h2>
+  <p class="section-desc">"The warrior who knows their priorities never loses their direction." — Sensei 🎋</p>
+
+  <div class="rec-list">
+    <div class="rec-item">
+      <div class="rec-num">1</div>
+      <div class="rec-content">
+        <div class="rec-title">🔴 Complete CPR / First Aid Certification NOW</div>
+        <div class="rec-desc">This is the entry ticket to CO450 (clinical observation). Without it, you cannot enter the clinic in Spring 2027. It is the simplest task with the highest consequence.</div>
+        <div class="rec-deadline">⏰ Deadline: Before Spring 2027 registration (Feb 2027)</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">2</div>
+      <div class="rec-content">
+        <div class="rec-title">🔴 Complete HIPAA + OSHA Training</div>
+        <div class="rec-desc">Annual training required. Schedule now — set calendar reminders for annual renewal. Missing this blocks clinical entry identically to missing CPR.</div>
+        <div class="rec-deadline">⏰ Deadline: Before Spring 2027. Annual renewal required throughout.</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">3</div>
+      <div class="rec-content">
+        <div class="rec-title">🔴 Plan CNT Certification Process</div>
+        <div class="rec-desc">CNT Certification is required before CI510 (Spring 2028). This is not quick — research the process now so you are not scrambling in Winter 2028.</div>
+        <div class="rec-deadline">⏰ Deadline: Complete before Spring 2028 registration</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">4</div>
+      <div class="rec-content">
+        <div class="rec-title">🔑 Protect EAM303 — The Root Gate</div>
+        <div class="rec-desc">Never delay EAM303 under any circumstance. This single course gates ALL herbology and multiple EAM sequences. Dedicate maximum study time to this course in Spring 2026.</div>
+        <div class="rec-deadline">⏰ Target: Spring 2026 — cannot be rescheduled</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">5</div>
+      <div class="rec-content">
+        <div class="rec-title">🔑 Protect WM420 — The Western Medicine Master Key</div>
+        <div class="rec-desc">WM420 Pathophysiology II gates 7 downstream Western Medicine courses simultaneously. Missing it means 7 doors stay closed for a full quarter. Take Winter 2027, no exceptions.</div>
+        <div class="rec-deadline">⏰ Target: Winter 2027 — cannot be rescheduled</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">6</div>
+      <div class="rec-content">
+        <div class="rec-title">📅 Register Early Every Quarter</div>
+        <div class="rec-desc">Open registration occurs 6-8 weeks before each term. Register on Day 1. Some courses fill quickly and are offered only once per year. Missing a course can delay graduation.</div>
+        <div class="rec-deadline">⏰ Action: Set calendar alerts for every open registration window through 2030</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">7</div>
+      <div class="rec-content">
+        <div class="rec-title">📝 Begin Phase Exam 1 Prep in Fall 2026</div>
+        <div class="rec-desc">Phase Exam 1 is the gate to clinical training. Begin reviewing content TWO FULL QUARTERS before it occurs (Spring 2027 Intensive). Treat every midterm as Phase Exam 1 practice.</div>
+        <div class="rec-deadline">⏰ Start: Fall 2026. Exam: Spring 2027 Intensive (Jun 16, 2027)</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">8</div>
+      <div class="rec-content">
+        <div class="rec-title">🌏 Begin Language Study Now</div>
+        <div class="rec-desc">Korean (Soohyeon + Suzie, 2x/week minimum) and Mandarin (HelloChinese, 10 min/day). By Summer 2029 study abroad, you need functional clinical vocabulary in at least one language.</div>
+        <div class="rec-deadline">⏰ Start: Fall 2026. Consistent for 3 years before Summer 2029.</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">9</div>
+      <div class="rec-content">
+        <div class="rec-title">💃 Build Your Dance Medicine Brand Now</div>
+        <div class="rec-desc">You are entering a specialty niche that virtually no other practitioner occupies. Begin networking with local ballroom studios, dance companies, and performing arts medicine organizations while in school.</div>
+        <div class="rec-deadline">⏰ Start: Now. Document dance medicine cases from first clinical shifts in 2028.</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">10</div>
+      <div class="rec-content">
+        <div class="rec-title">🧘 Honor the 3-Week Breaks</div>
+        <div class="rec-desc">The breaks are not absence of training — they are a different kind of training. Before heavy quarters: preview course material. Before Phase Exams: intensive review. Otherwise: genuine rest and recovery.</div>
+        <div class="rec-deadline">⏰ Critical breaks: Winter 2027 (PE1 prep) · Fall 2027 (PE2 prep) · Spring 2028 (Summer 2028 preview)</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">11</div>
+      <div class="rec-content">
+        <div class="rec-title">📊 Monitor GPA Every Quarter</div>
+        <div class="rec-desc">Minimum 3.0 GPA required. If approaching 3.2 → reduce elective load immediately. Never wait until after it drops. The 🔴 very heavy quarters of 2028-2029 are the highest GPA risk windows.</div>
+        <div class="rec-deadline">⏰ Check every quarter. Act when GPA drops below 3.3.</div>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">12</div>
+      <div class="rec-content">
+        <div class="rec-title">🎓 Keep Summer 2030 in View Always</div>
+        <div class="rec-desc">Every decision — course selection, electives, study abroad, competition scheduling — should be evaluated through this lens: "Does this protect Summer 2030 graduation?" That is the north star.</div>
+        <div class="rec-deadline">⏰ Graduation target: Summer 2030 — all 6 plans arrive at the same destination.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:1.5rem">
+    <p>⚔️💃 "The white belt and the black belt are made of the same cloth — the difference is what the warrior has endured between them. You began this journey on January 5, 2026. You will complete it in Summer 2030 as a Doctor of Acupuncture & Herbal Medicine — the healer that ballroom dancers have never had." — Sensei 🎋</p>
+  </div>
+
+  <div style="text-align:center;padding:2rem 0;border-top:1px solid var(--border);margin-top:1.5rem">
+    <div style="font-size:0.75rem;color:var(--text3);letter-spacing:0.1em">VUIM D.AcOM ACADEMIC PLANNER</div>
+    <div style="font-size:1rem;color:var(--gold);margin:0.5rem 0">Jonathan Centeno · Dance Medicine · 2026–2030</div>
+    <div style="font-size:0.72rem;color:var(--text3)">Built from all VUIM program documents · Updated from project knowledge · For daily use</div>
+  </div>
+</div>
+
+<script>
+// ===== TRACKER DATA =====
+const trackerData = {
+  certs: [
+    { id: 'cpr', label: 'CPR / First Aid Certification 🔴' },
+    { id: 'hipaa', label: 'HIPAA Training (Annual) 🔴' },
+    { id: 'osha', label: 'OSHA Training (Annual) 🔴' },
+    { id: 'ehr', label: 'EHR Training (before CO510)' },
+    { id: 'cnt', label: 'CNT Certification (before CI510) 🔴' },
+  ],
+  y1: [
+    { id: 'eam302', label: 'EAM302 Basic Theory I ✅' },
+    { id: 'eam301', label: 'EAM301 History of Eastern Medicine' },
+    { id: 'wm300', label: 'WM300 Western Medical Terminology' },
+    { id: 'wm301', label: 'WM301 Biology/Biochem/Nutrition' },
+    { id: 'eam303', label: 'EAM303 Basic Theory II 🔑' },
+    { id: 'wm340', label: 'WM340 Anatomy & Physiology I' },
+    { id: 'wm350', label: 'WM350 Anatomy & Physiology II' },
+    { id: 'ac300', label: 'AC300 Acupuncture I: Channel Theory' },
+    { id: 'wm360', label: 'WM360 Anatomy & Physiology III' },
+    { id: 'eam310', label: 'EAM310 Diagnosis I*' },
+    { id: 'eam320', label: 'EAM320 Eastern Nutrition' },
+    { id: 'ac310', label: 'AC310 Acupuncture II: Point Location A' },
+    { id: 'tb301', label: 'TB301 Tai Ji Quan' },
+    { id: 'wm410', label: 'WM410 Pathophysiology I' },
+    { id: 'eam312', label: 'EAM312 Diagnosis II' },
+    { id: 'ac320', label: 'AC320 Acupuncture III: Point Location B' },
+    { id: 'hb310', label: 'HB310 Herbology I 🌿' },
+    { id: 'me410', label: 'ME410 Medical Ethics & Legalities' },
+  ],
+  y2: [
+    { id: 'wm420', label: 'WM420 Pathophysiology II 🔑' },
+    { id: 'ac410', label: 'AC410 Introduction to Clinical Technique' },
+    { id: 'me420', label: 'ME420 Clinical Communication I' },
+    { id: 'ac330', label: 'AC330 Acupuncture IV: Point Functions A' },
+    { id: 'tb300', label: 'TB300 Qi Gong' },
+    { id: 'wm480', label: 'WM480 Orthopedic & Neurologic Eval' },
+    { id: 'wm450', label: 'WM450 Physical Exam and Assessment' },
+    { id: 'wm530', label: 'WM530 Western Internal Medicine III' },
+    { id: 'ac340', label: 'AC340 Acupuncture V: Point Functions B' },
+    { id: 'co450', label: 'CO450 Intro to Clinical Observation*' },
+    { id: 'ac420', label: 'AC420 Advanced Clinical Techniques' },
+    { id: 'me520', label: 'ME520 Clinical Communication II' },
+    { id: 'co510a', label: 'CO510 Clinical Observation I (1 shift/wk)*' },
+    { id: 'hb410', label: 'HB410 Herbology II 🌿' },
+    { id: 'wm510', label: 'WM510 Western Internal Medicine I' },
+    { id: 'wm520', label: 'WM520 Western Internal Medicine II' },
+    { id: 'ac390', label: 'AC390 Acupuncture Treatment Planning' },
+    { id: 'co510b', label: 'CO510/CO520 Clinical Obs I+II (1 shift each)*' },
+    { id: 'ac460', label: 'AC460 Tui Na I: Basic Techniques*' },
+    { id: 'ac430', label: 'AC430 Acupuncture Microsystems*' },
+    { id: 'wm550', label: 'WM550 Red Flags & Emergency Management' },
+  ],
+  y3: [
+    { id: 'wm400', label: 'WM400 Research Methodologies' },
+    { id: 'hb420', label: 'HB420 Herbology III 🌿' },
+    { id: 'hb430', label: 'HB430 Herbology IV 🌿' },
+    { id: 'me311', label: 'ME311 Practice Management & Billing' },
+    { id: 'im610', label: 'IM610 Collaborative Care' },
+    { id: 'ac510', label: 'AC510 Treatment of Orthopedic Disorders*' },
+    { id: 'ci510a', label: 'CI510 Clinic Internship I (Spring 2028)*' },
+    { id: 'ci510b', label: 'CI510 Clinic Internship I (Summer 2028)*' },
+    { id: 'eam430', label: 'EAM430 Internal Medicine I' },
+    { id: 'eam440', label: 'EAM440 Internal Medicine II' },
+    { id: 'hb440', label: 'HB440 Herbs: Formulas I' },
+    { id: 'ci520', label: 'CI520 Clinic Internship II*' },
+    { id: 'eam460', label: 'EAM460 East Asian Medicine Specialty Topics' },
+    { id: 'hb510', label: 'HB510 Herbs: Formulas II' },
+    { id: 'wm610', label: 'WM610 Pharmacology & Biophysics' },
+  ],
+  y4: [
+    { id: 'ci530', label: 'CI530 Clinic Internship III*' },
+    { id: 'cm700', label: 'CM700 Cancer Care' },
+    { id: 'hb520', label: 'HB520 Herbs: Formulas III' },
+    { id: 'hb540', label: 'HB540 Shang Han Lun Cold Damage' },
+    { id: 'eam450', label: 'EAM450 Internal Medicine III' },
+    { id: 'cm750', label: 'CM750 Orthopedics 🦵' },
+    { id: 'im600', label: 'IM600 Healthcare Systems' },
+    { id: 'ci540a', label: 'CI540 Clinic Internship IV (Summer 2029)*' },
+    { id: 'el600', label: 'EL600 Comprehensive Review: Biomedicine' },
+    { id: 'hb550', label: 'HB550 Advanced Formula Study 🔑' },
+    { id: 'el500', label: 'EL500 Master Tung Acupuncture 💃' },
+    { id: 'el310', label: 'EL310 Tui Na II: Advanced Techniques' },
+    { id: 'ci550a', label: 'CI550 Clinical Internship V (Fall 2029)*' },
+    { id: 'wm620', label: 'WM620 Western Medical Diagnostic Tests' },
+    { id: 'hb400', label: 'HB400 Special Topics in Herbal Medicine' },
+    { id: 'cm770', label: 'CM770 Reproductive Health' },
+  ],
+  y5: [
+    { id: 'ci540b', label: 'CI540 Clinic Internship IV (Winter 2030)*' },
+    { id: 'hb530', label: 'HB530 Herbs: Formulas IV' },
+    { id: 'ci550b', label: 'CI550 Clinical Internship V (Spring 2030)*' },
+    { id: 'cm740', label: 'CM740 Mental Health & Trauma-Informed Care' },
+    { id: 'me600', label: 'ME600 Advanced Practice Management' },
+    { id: 'wm500', label: 'WM500 Microbiology & Infectious Diseases' },
+  ],
+  exams: [
+    { id: 'pe1', label: 'Phase Exam 1 (Spring 2027 Intensive)' },
+    { id: 'pe2', label: 'Phase Exam 2 (Winter 2028 Intensive)' },
+    { id: 'pe3', label: 'Phase Exam 3 (Summer 2028 Intensive)' },
+    { id: 'pe4', label: 'Phase Exam 4 (Fall 2028 Intensive)' },
+    { id: 'pe5', label: 'Phase Exam 5 (Winter 2030 Intensive)' },
+    { id: 'grad', label: '🎓 DAcHM Graduation Exam (Spring 2030 Intensive)' },
+    { id: 'nccaom', label: 'NCCAOM Exam Applications' },
+  ]
+};
+
+// ===== BUILD TRACKER =====
+function buildTracker() {
+  Object.keys(trackerData).forEach(group => {
+    const container = document.getElementById('group-' + group);
+    if (!container) return;
+    trackerData[group].forEach(item => {
+      const saved = localStorage.getItem('vuim-' + item.id) === 'true';
+      const div = document.createElement('div');
+      div.className = 'tracker-item' + (saved ? ' checked' : '');
+      div.id = 'ti-' + item.id;
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.id = 'cb-' + item.id;
+      cb.checked = saved;
+      const label = document.createElement('label');
+      label.htmlFor = 'cb-' + item.id;
+      label.textContent = item.label;
+      div.appendChild(cb);
+      div.appendChild(label);
+      div.addEventListener('click', function(e) {
+        if (e.target !== cb) cb.checked = !cb.checked;
+        localStorage.setItem('vuim-' + item.id, cb.checked);
+        div.classList.toggle('checked', cb.checked);
+        updateBars();
+      });
+      container.appendChild(div);
+    });
+  });
+  updateBars();
+}
+
+function updateBars() {
+  let totalItems = 0, totalDone = 0;
+  Object.keys(trackerData).forEach(group => {
+    const items = trackerData[group];
+    const done = items.filter(item => localStorage.getItem('vuim-' + item.id) === 'true').length;
+    const pct = items.length ? Math.round(done / items.length * 100) : 0;
+    const bar = document.getElementById('bar-' + group);
+    if (bar) bar.style.width = pct + '%';
+    totalItems += items.length;
+    totalDone += done;
+  });
+  const overall = totalItems ? Math.round(totalDone / totalItems * 100) : 0;
+  const tBar = document.getElementById('total-bar');
+  const tPct = document.getElementById('total-pct');
+  if (tBar) tBar.style.width = overall + '%';
+  if (tPct) tPct.textContent = overall + '% Complete';
+}
+
+// ===== PLANS TABS =====
+function showPlan(planId) {
+  document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.plan-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(planId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== EXPORT / IMPORT PROGRESS =====
+function exportProgress() {
+  const state = {};
+  Object.values(trackerData).flat().forEach(item => {
+    const val = localStorage.getItem('vuim-' + item.id);
+    if (val === 'true') state[item.id] = 1;
+  });
+  const code = btoa(JSON.stringify(state));
+  document.getElementById('export-text').value = code;
+  document.getElementById('export-box').style.display = 'block';
+  document.getElementById('import-box').style.display = 'none';
+}
+
+function copyCode() {
+  const text = document.getElementById('export-text');
+  text.select();
+  navigator.clipboard.writeText(text.value).catch(() => document.execCommand('copy'));
+  const conf = document.getElementById('copy-confirm');
+  conf.style.display = 'inline';
+  setTimeout(() => conf.style.display = 'none', 2500);
+}
+
+function showImport() {
+  document.getElementById('import-box').style.display = 'block';
+  document.getElementById('export-box').style.display = 'none';
+}
+
+function importProgress() {
+  const raw = document.getElementById('import-text').value.trim();
+  const conf = document.getElementById('import-confirm');
+  try {
+    const state = JSON.parse(atob(raw));
+    let count = 0;
+    Object.values(trackerData).flat().forEach(item => {
+      if (state[item.id]) {
+        localStorage.setItem('vuim-' + item.id, 'true');
+        const cb = document.getElementById('cb-' + item.id);
+        const ti = document.getElementById('ti-' + item.id);
+        if (cb) cb.checked = true;
+        if (ti) ti.classList.add('checked');
+        count++;
+      }
+    });
+    updateBars();
+    conf.style.color = 'var(--green)';
+    conf.textContent = '✓ ' + count + ' items restored!';
+    conf.style.display = 'inline';
+  } catch(e) {
+    conf.style.color = 'var(--red)';
+    conf.textContent = '✗ Invalid code — try again';
+    conf.style.display = 'inline';
+  }
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function() {
+  buildTracker();
+  // Auto-check EAM302 as completed
+  const eam302cb = document.getElementById('cb-eam302');
+  if (eam302cb && !localStorage.getItem('vuim-eam302')) {
+    eam302cb.checked = true;
+    localStorage.setItem('vuim-eam302', 'true');
+    const ti = document.getElementById('ti-eam302');
+    if (ti) ti.classList.add('checked');
+    updateBars();
+  }
+});
+</script>
+</body>
+</html>
